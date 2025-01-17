@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center mb-4">
+    <h1 class="display-4">Bem-vindo ao ConQuiz!</h1>
+    <p class="lead">Prepare-se para concursos com nossas questões e simulados.</p>
+    <hr class="my-4">
+    {% if not current_user.is_authenticated %}
+    <p>Junte-se a nós para começar sua jornada de estudos!</p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('auth.register') }}" role="button">Começar Agora</a>
+    {% else %}
+    <p>Continue seus estudos!</p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('main.dashboard') }}" role="button">Ir para Dashboard</a>
+    {% endif %}
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                <i class="fas fa-book fa-3x mb-3 text-primary"></i>
+                <h5 class="card-title">Questões Diversificadas</h5>
+                <p class="card-text">Milhares de questões de diversos concursos para você praticar.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                <i class="fas fa-clipboard-check fa-3x mb-3 text-primary"></i>
+                <h5 class="card-title">Simulados</h5>
+                <p class="card-text">Crie simulados personalizados para testar seus conhecimentos.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                <i class="fas fa-chart-line fa-3x mb-3 text-primary"></i>
+                <h5 class="card-title">Acompanhamento</h5>
+                <p class="card-text">Acompanhe seu progresso e identifique pontos de melhoria.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

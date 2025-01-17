@@ -1,0 +1,1143 @@
+{
+    "prova": {
+      "id": "807_BASE_NS_DM",
+      "nome": "Concurso IFRS",
+      "banca": "IFRS",
+      "ano": 2023,
+      "nivel": "Superior",
+      "cargo": "Administração"
+    },
+    "questoes": [
+      {
+        "id": "q01",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "01",
+        "area": "Língua Portuguesa",
+        "enunciado": "Considerando o exposto pelo texto, analise as assertivas a seguir: I. A autora justifica por que escreve elencando uma série de inaptidões suas. II. Assim como para quem fabrica guarda-chuvas, atende em consultórios ou limpa vidraças, a morte não será benéfica para a autora. III. A escrita ajudou a autora, ao longo dos anos, a livrar-se de coisas que a oprimiam. Quais estão corretas?",
+        "alternativas": [
+          {
+            "alternativa": "B",
+            "texto": "Apenas II."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Apenas I e II."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Apenas I e III."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Apenas II e III. 807_BASE _NS_DM NÍVEL SUPERIOR 712"
+          }
+        ],
+        "resposta_correta": "E"
+      },
+      {
+        "id": "q02",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "02",
+        "area": "Língua Portuguesa",
+        "enunciado": "Assinale a alternativa que indica uma característica que NÃO poderia identificar a autora com base nas descrições que ela apresenta de si somente ao longo do texto.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Solitária."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Depressiva."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Esperançosa."
+          }
+        ],
+        "resposta_correta": "D"
+      },
+      {
+        "id": "q04",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "04",
+        "area": "Língua Portuguesa",
+        "enunciado": "Considerando a palavra ônus (l. 12), analise as assertivas a seguir: I. Trata-se de um substantivo masculino que é antônimo de sobrecarga. II. A partir da palavra ônus, pode-se formar o adjetivo oneroso, que mantém com ela relações de proximidade de sentido. III. Um sinônimo possível para a palavra é custo. Quais estão corretas?",
+        "alternativas": [
+          {
+            "alternativa": "B",
+            "texto": "Apenas II."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Apenas I e II."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Apenas I e III."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Apenas II e III."
+          }
+        ],
+        "resposta_correta": "E"
+      },
+      {
+        "id": "q06",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "06",
+        "area": "Direito Administrativo",
+        "enunciado": "O regime Jurídico dos Servidores Públicos Civis da União, das autarquias e das fundações públicas federais é regulamentado pela Lei n º 8.112 1990. Levando em consideração o referido instrumento normativo, assinale a alternativa correta.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "A conduta do servidor de valer-se do cargo para lograr proveito pessoal ou de outrem, em detrimento da dignidade da função pública, embora reprovável, não é tratada no regime jurídico dos servidores federais, sendo de matéria específica da Lei de Improbidade Administrativa."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Assiduidade ao serviço e presteza nos atendimentos estão entre os deveres do servidor, expressamente mencionados na Lei."
+          },
+          {
+            "alternativa": "C",
+            "texto": "O servidor poderá ausentar-se do serviço, sem qualquer prejuízo, em caso de falecimento de sogro ou sogra."
+          },
+          {
+            "alternativa": "D",
+            "texto": "O servidor investido em mandato federal eletivo poderá perceber as vantagens de seu cargo, sem prejuízo da remuneração do cargo eletivo, desde que haja compatibilidade de horários."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Ainda que em estágio probatório, o servidor ocupante de cargo efetivo faz jus à licença remunerada por um período de três anos para tratar de interesse particular."
+          }
+        ],
+        "resposta_correta": "B"
+      },
+      {
+        "id": "q07",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "07",
+        "area": "Educação",
+        "enunciado": "No bojo da Resolução CNECP n º 12021, encontram-se os princípios norteadores das diretrizes da Educação Profissional e Tecnológica (EPT). Sobre esses princípios, assinale a alternativa INCORRETA.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Entre os princípios da EPT, encontra-se o respeito constitucional ao pluralismo de ideias e de concepções pedagógicas."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Articulação com o desenvolvimento socioeconômico e os arranjos produtivos locais é um dos princípios da EPT."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Os princípios da EPT elencam valores tradicionalmente reconhecidos como importantes na construção do ensino, o que exclui a promoção da inovação."
+          },
+          {
+            "alternativa": "D",
+            "texto": "O rol de princípios da EPT descritos na Resolução tem amplo escopo temático, tratando de questões que vão desde estímulo à pesquisa até necessidades de pessoas com deficiência."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Os princípios da EPT reconhecem identidades de gênero e étnico-raciais, assim como dos povos indígenas, quilombolas, populações do campo, imigrantes e itinerantes."
+          }
+        ],
+        "resposta_correta": "C"
+      },
+      {
+        "id": "q08",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "08",
+        "area": "Direito",
+        "enunciado": "Considerando o que dispõe a Lei n º 13.146 2015 (Estatuto da Pessoa com Deficiência), analise as assertivas abaixo e assinale a alternativa correta. I. Atendente pessoal é a pessoa, membro ou não da família, que, com ou sem remuneração, assiste ou presta cuidados básicos e essenciais à pessoa com deficiência no exercício de suas atividades diárias, excluídas as técnicas ou os procedimentos identificados com profissões legalmente estabelecidas. II. Segundo o Estatuto da Pessoa com Deficiência, a deficiência não afeta a plena capacidade civil da pessoa, inclusive para exercer o direito à guarda, à tutela, à curatela e à adoção, como adotante ou adotando, em igualdade de oportunidades com as demais pessoas. III. A educação constitui direito da pessoa com deficiência, assegurado sistema educacional inclusivo em todos os níveis e aprendizado ao longo de toda a vida, de forma a alcançar o máximo desenvolvimento possível de seus talentos e habilidades físicas, sensoriais, intelectuais e sociais, segundo suas características, interesses e necessidades de aprendizagem.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Todas as assertivas estão corretas."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Todas as assertivas estão incorretas."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Apenas a assertiva I está correta."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Apenas a assertiva II está correta."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Apenas as assertivas I e III estão corretas. 807_BASE _NS_DM NÍVEL SUPERIOR 712"
+          }
+        ],
+        "resposta_correta": "A"
+      },
+      {
+        "id": "q09",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "09",
+        "area": "Direito",
+        "enunciado": "Analise as seguintes asserções e a relação proposta entre elas, tendo por referência a Lei n º 12.7722012, que dispõe sobre a estruturação do Plano de Carreiras e Cargos de Magistério Federal: I. A Carreira de Magistério Superior é uma das carreiras previstas no Plano de Carreiras e Cargos de Magistério Federal. PORQUE II. O desenvolvimento na Carreira de Magistério Superior ocorrerá mediante progressão funcional e promoção. A respeito dessas asserções, assinale a alternativa correta.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "As asserções I e II são proposições verdadeiras, e a II é uma justificativa da I."
+          },
+          {
+            "alternativa": "B",
+            "texto": "A asserção I é uma proposição falsa, e a II é uma proposição verdadeira."
+          },
+          {
+            "alternativa": "C",
+            "texto": "A asserção I é uma proposição verdadeira, e a II é uma proposição falsa."
+          },
+          {
+            "alternativa": "D",
+            "texto": "As asserções I e II são proposições verdadeiras, mas a II não é uma justificativa da I."
+          },
+          {
+            "alternativa": "E",
+            "texto": "As asserções I e II são proposições falsas."
+          }
+        ],
+        "resposta_correta": "A"
+      },
+      {
+        "id": "q10",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "10",
+        "area": "Educação",
+        "enunciado": "Sabe-se que a Educação Profissional e Tecnológica (EPT) tem por objetivo preparar os estudantes para o ingresso qualificado no mercado de trabalho. No texto A polissemia da categoria trabalho e a batalha das ideias nas sociedades de classe (2009), Gaudêncio Frigotto discute a relação entre trabalho, classe social e educação. A respeito das ideais defendidas pelo autor no texto mencionado, analise as assertivas abaixo, assinalando V, se verdadeiras, ou F, se falsas. ( ) O autor propõe um debate epistemológico a respeito da relação trabalho e ensino de idiomas no Brasil, passando ao largo de discussões relacionadas à disputa de classes. ( ) O encaminhamento dado ao autor, dentro do texto, é o de que a consciência, a teoria e a linguagem são produzidas dentro da realidade histórica, tornando-se, elas mesmas, parte dessa realidade. ( ) Pela leitura do texto, nota-se que o autor adota uma postura liberal e de repúdio às ideias apresentadas por Karl Marx. A ordem correta de preenchimento dos parênteses, de cima para baixo, é:",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "V – V – F."
+          },
+          {
+            "alternativa": "B",
+            "texto": "V – F – V."
+          },
+          {
+            "alternativa": "C",
+            "texto": "F – V – V."
+          },
+          {
+            "alternativa": "D",
+            "texto": "F – F – V."
+          },
+          {
+            "alternativa": "E",
+            "texto": "F – V – F."
+          }
+        ],
+        "resposta_correta": "E"
+      },
+      {
+        "id": "q11",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "11",
+        "area": "Direito",
+        "enunciado": "A Lei n º 12.711 2012 dispõe sobre o ingresso nas universidades federais e nas instituições federais de ensino técnico de nível médio. Acerca da reserva de vagas prevista no referido instrumento normativo, assinale a alternativa correta.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Embora as universidades federais tenham a obrigação legal de reservar vagas para indígenas, a mesma regra não se aplica às instituições de ensino técnico, em razão da especificidade técnica dos métodos de ensino desenvolvidos nessas instituições."
+          },
+          {
+            "alternativa": "B",
+            "texto": "A fim de se atingir a igualdade de gênero, a Lei prevê a reserva de vagas para mulheres."
+          },
+          {
+            "alternativa": "C",
+            "texto": "A Lei prevê que metade das vagas nas instituições federais de educação superior vinculadas ao Ministério da Educação, em cada concurso seletivo para ingresso nos cursos de graduação, por curso e turno, serão reservadas para candidatos que tenham cursado o ensino médio integralmente em escola pública."
+          },
+          {
+            "alternativa": "D",
+            "texto": "A reserva de vagas contempla, além dos estudantes oriundos de famílias com renda igual ou inferior a 1,5 salário-mínimo per capita, apenas candidatos negros e indígenas."
+          },
+          {
+            "alternativa": "E",
+            "texto": "As instituições federais de ensino médio, a fim de assegurar a maior abrangência sociocultural possível, têm a obrigação legal de reservar 75 de suas vagas a candidatos autodeclarados pretos, pardos e indígenas e a pessoas com deficiência. 807_BASE _NS_DM NÍVEL SUPERIOR 712"
+          }
+        ],
+        "resposta_correta": "C"
+      },
+      {
+        "id": "q12",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "12",
+        "area": "Educação",
+        "enunciado": "Tendo em consideração as disposições contidas na Lei n º 11.892 2009, que institui a Rede Federal de Educação Profissional, Científica e Tecnológica, cria os Institutos Federais de Educação, Ciência e Tecnologia, analise as assertivas abaixo e assinale a alternativa correta. I. O Colégio Pedro II é parte da Rede Federal de Educação Profissional, Científica e Tecnológica. II. Embora sejam dotados de ampla capacidade organizativa, os Institutos Federais não têm autonomia para criar ou extinguir cursos, tampouco para registrar diplomas dos cursos por eles oferecidos. III. Entre as finalidades e características dos Institutos Federais está a de realizar e estimular a pesquisa aplicada, a produção cultural, o empreendedorismo, o cooperativismo e o desenvolvimento científico e tecnológico.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Todas as assertivas estão corretas."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Todas as assertivas estão incorretas."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Apenas a assertiva I está correta."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Apenas a assertiva II está correta."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Apenas as assertivas I e III estão corretas."
+          }
+        ],
+        "resposta_correta": "E"
+      },
+      {
+        "id": "q13",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "13",
+        "area": "Direito",
+        "enunciado": "Relacione a Coluna 1 à Coluna 2, associando os conceitos apresentados pela Lei n º 13.146 2015 (Lei Brasileira de Inclusão da Pessoa com Deficiência – Estatuto da Pessoa com Deficiência) às suas respectivas descrições. Coluna 1 1. Acessibilidade. 2. Tecnologia assistiva. 3. Desenho universal. 4. Mobiliário urbano. Coluna 2 ( ) Produtos, equipamentos, dispositivos, recursos, metodologias, estratégias, práticas e serviços que objetivem promover a funcionalidade, relacionada à atividade e à participação da pessoa com deficiência ou com mobilidade reduzida, visando à sua autonomia, independência, qualidade de vida e inclusão social. ( ) Concepção de produtos, ambientes, programas e serviços a serem usados por todas as pessoas, sem necessidade de adaptação ou de projeto específico, incluindo os recursos de tecnologia assistiva. ( ) Conjunto de objetos existentes nas vias e nos espaços públicos, superpostos ou adicionados aos elementos de urbanização ou de edificação, de forma que sua modificação ou seu traslado não provoque alterações substanciais nesses elementos, tais como semáforos, postes de sinalização e similares, terminais e pontos de acesso coletivo às telecomunicações, fontes de água, lixeiras, toldos, marquises, bancos, quiosques e quaisquer outros de natureza análoga. ( ) Possibilidade e condição de alcance para utilização, com segurança e autonomia, de espaços, mobiliários, equipamentos urbanos, edificações, transportes, informação e comunicação, inclusive seus sistemas e tecnologias, bem como de outros serviços e instalações abertos ao público, de uso público ou privados de uso coletivo, tanto na zona urbana como na rural, por pessoa com deficiência ou com mobilidade reduzida. A ordem correta de preenchimento dos parênteses, de cima para baixo, é:",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "1 – 3 – 2 – 4."
+          },
+          {
+            "alternativa": "B",
+            "texto": "2 – 3 – 4 – 1."
+          },
+          {
+            "alternativa": "C",
+            "texto": "4 – 3 – 1 – 2."
+          },
+          {
+            "alternativa": "D",
+            "texto": "1 – 2 – 3 – 4."
+          },
+          {
+            "alternativa": "E",
+            "texto": "2 – 4 – 1 – 3. 807_BASE _NS_DM NÍVEL SUPERIOR 712"
+          }
+        ],
+        "resposta_correta": "D"
+      },
+      {
+        "id": "q14",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "14",
+        "area": "Educação",
+        "enunciado": "A Lei n º 9.394 1996 estabelece as diretrizes e bases da educação nacional. Sobre o referido instrumento normativo, assinale a alternativa INCORRETA.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "O respeito à liberdade e apreço à tolerância é expressamente incluído como um dos princípios sob os quais o ensino será ministrado."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Conforme a Lei, a educação tem por finalidade o pleno desenvolvimento do educando, seu preparo para o exercício da cidadania e sua qualificação para o trabalho."
+          },
+          {
+            "alternativa": "C",
+            "texto": "A Lei disciplina a educação escolar, que se desenvolve, predominantemente, por meio do ensino, em instituições próprias."
+          },
+          {
+            "alternativa": "D",
+            "texto": "O ensino é livre à iniciativa privada, cabendo ao Poder Público tão somente a avaliação de qualidade do ensino prestado."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Caberá à União a coordenação da política nacional de educação, articulando os diferentes níveis e sistemas e exercendo função normativa, redistributiva e supletiva em relação às demais instâncias educacionais."
+          }
+        ],
+        "resposta_correta": "D"
+      },
+      {
+        "id": "q15",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "15",
+        "area": "Ética",
+        "enunciado": "Sobre as Regras Deontológicas contidas no Código de Ética Profissional do Servidor Público Civil do Poder Executivo Federal, analise as assertivas abaixo, assinalando V, se verdadeiras, ou F, se falsas. ( ) O servidor público deixar qualquer pessoa à espera de solução que compete ao setor em que exerça suas funções, permitindo a formação de longas filas, ou qualquer outra espécie de atraso na prestação do serviço, não caracteriza apenas atitude contra a ética ou ato de desumanidade, mas principalmente grave dano moral aos usuários dos serviços públicos. ( ) O grande axioma contido no escopo normativo da conduta ética do servidor público é o da prestação de serviço público. Por esse motivo, os fatos verificados na conduta do dia a dia na vida privada do servidor não geram nenhuma repercussão na vida funcional. ( ) A moralidade da Administração Pública não se limita à distinção entre o bem e o mal, devendo ser acrescida da ideia de que o fim é sempre o bem comum. O equilíbrio entre a legalidade e a finalidade, na conduta do servidor público, é que poderá consolidar a moralidade do ato administrativo. A ordem correta de preenchimento dos parênteses, de cima para baixo, é:",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "V – F – V."
+          },
+          {
+            "alternativa": "B",
+            "texto": "V – V – F."
+          },
+          {
+            "alternativa": "C",
+            "texto": "F – V – V."
+          },
+          {
+            "alternativa": "D",
+            "texto": "F – F – V."
+          },
+          {
+            "alternativa": "E",
+            "texto": "F – F – F. CONHECIMENTOS PEDAGÓGICOS"
+          }
+        ],
+        "resposta_correta": "A"
+      },
+      {
+        "id": "q16",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "16",
+        "area": "Educação",
+        "enunciado": "De acordo com as Diretrizes Curriculares Nacionais para a Educação das Relações Étnico-Raciais e para o Ensino de História e Cultura Afro-Brasileira e Africana, a obrigatoriedade de inclusão de História e Cultura Afro-Brasileira e Africana nos currículos da Educação Básica trata-se de decisão política, com fortes repercussões pedagógicas, inclusive na formação de professores. Nesse sentido, assinale a alternativa INCORRETA.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Reconhece-se que, além de garantir vagas para negros nos bancos escolares, é preciso valorizar devidamente a história e a cultura de seu povo, buscando reparar danos, que se repetem há cinco séculos, à sua identidade e aos seus direitos."
+          },
+          {
+            "alternativa": "B",
+            "texto": "A relevância do estudo de temas decorrentes da história e cultura afro-brasileira e africana se restringe à população negra, uma vez que devem educar-se enquanto cidadãos atuantes no seio de uma sociedade multicultural e pluriétnica, capazes de construir uma nação democrática."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Não se trata de mudar um foco etnocêntrico marcadamente de raiz europeia por um africano, mas de ampliar o foco dos currículos escolares para a diversidade cultural, racial, social e econômica brasileira."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Cabe às escolas incluir no contexto dos estudos e atividades que proporciona diariamente também as contribuições histórico-culturais dos povos indígenas e dos descendentes de asiáticos, além das de raiz africana e europeia."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Cabe aos administradores dos sistemas de ensino e das mantenedoras prover as escolas, seus professores e alunos de material bibliográfico e de outros materiais didáticos, além de acompanhar os trabalhos desenvolvidos. 807_BASE _NS_DM NÍVEL SUPERIOR 712"
+          }
+        ],
+        "resposta_correta": "B"
+      },
+      {
+        "id": "q17",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "17",
+        "area": "Educação",
+        "enunciado": "A Lei n º 14.533 2023 institui a Política Nacional de Educação Digital (PNED), estruturada a partir da articulação entre programas, projetos e ações de diferentes entes federados, áreas e setores governamentais, a fim de potencializar os padrões e incrementar os resultados das políticas públicas relacionadas ao acesso da população brasileira a recursos, ferramentas e práticas digitais, com prioridade para as populações mais vulneráveis. A PNED apresenta os seguintes eixos estruturantes e objetivos, EXCETO:",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Inclusão digital."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Educação digital escolar."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Capacitação e especialização digital."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Ferramentas de diagnóstico."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Pesquisa e Desenvolvimento (PD) em Tecnologias da Informação e Comunicação (TICs)."
+          }
+        ],
+        "resposta_correta": "D"
+      },
+      {
+        "id": "q18",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "18",
+        "area": "Educação",
+        "enunciado": "De acordo com a Resolução n º 042009, que institui as Diretrizes Operacionais para o Atendimento Educacional Especializado na Educação Básica, modalidade Educação Especial, esta se realiza em todos os níveis, etapas e modalidades de ensino, tendo o Atendimento Educacional Especializado (AEE) como parte integrante do processo educacional. Para fins dessas diretrizes, os alunos que apresentam um quadro de alterações no desenvolvimento neuropsicomotor, comprometimento nas relações sociais, na comunicação ou estereotipias motoras são considerados alunos:",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Com transtornos globais do desenvolvimento."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Com altas habilidades."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Superdotados."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Com transtornos de sociabilidade."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Com transtornos situacionais."
+          }
+        ],
+        "resposta_correta": "A"
+      },
+      {
+        "id": "q19",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "19",
+        "area": "Educação",
+        "enunciado": "De acordo com os estudos de Luckesi (2022), avaliar é o ato de diagnosticar uma experiência tendo em vista reorientá-la para produzir o melhor resultado possível. Nesse contexto, a avaliação não é classificatória nem seletiva, e sim:",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Pedagógico-didática e interativa."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Diagnóstica e referencial."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Diagnóstica e inclusiva."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Pedagógico-interativa e inclusiva."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Pedagógico-didática e diagnóstica."
+          }
+        ],
+        "resposta_correta": "C"
+      },
+      {
+        "id": "q20",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "20",
+        "area": "Educação",
+        "enunciado": "Segundo Valente (2018), as metodologias ativas consistem em uma série de técnicas, procedimentos e processos utilizados pelos professores, durante as aulas, a fim de auxiliar a aprendizagem dos alunos. O fato de elas serem ativas está relacionado com a realização de práticas pedagógicas para envolver os alunos, engajá-los em atividades práticas nas quais eles sejam protagonistas da sua aprendizagem. Assinale a alternativa que NÃO apresenta uma metodologia ativa.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Aprendizagem baseada em projetos."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Aprendizagem por meio de jogos."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Método do caso ou discussão e solução de casos."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Aprendizagem em equipe."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Sala de aula artificial. 807_CE_01_NS_DM ADMINISTRAÇÃO 812 CONHECIMENTOS ESPECÍFICOS"
+          }
+        ],
+        "resposta_correta": "E"
+      },
+      {
+        "id": "q21",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "21",
+        "area": "Administração",
+        "enunciado": "De acordo com Maximiano (2012), a Teoria dos Sistemas surgiu com os trabalhos do biólogo austríaco Ludwig von Bertalanffy, publicados entre 1950 e 1968. Ao contrário das demais, essa teoria buscava conhecer a complexidade e a pluralidade que podem existir em uma mesma organização. Portanto, não buscava solucionar problemas ou tentar soluções práticas, mas sim produzir teorias e conceitos capazes de criar condições de aplicabilidade nas organizações, utilizando experiências empíricas. Sobre a Teoria dos Sistemas, assinale a alternativa correta.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "As organizações passaram a ser vistas como um sistema fechado, observando sua dependência em relação aos insumos do contexto em que elas se inserem."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Observou um desequilíbrio provocado pela ênfase nos aspectos formais. Posteriormente, este desequilíbrio passou a ser causado pela ênfase exagerada no indivíduo."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Trouxe uma nova visão do homem, identificando-o como ser participante de um grupo, e não como um indivíduo autônomo. O que o homem pensava e como se comportava passaram a ser pontos de interesse, considerando a influência que poderiam exercer sobre a produtividade das organizações."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Foi desenvolvida por cientistas sociais e representou um movimento de oposição à abordagem clássica de Taylor e Fayol, procurando substituir a ênfase nas tarefas pelo foco nas pessoas."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Seus conceitos forneceram embasamento para a interpretação das organizações dos pontos de vista interno e externo, com foco na necessidade de avaliar a organização como um todo composto de partes inter-relacionadas, e não somente em departamentos ou setores, de maneira individualizada."
+          }
+        ],
+        "resposta_correta": "A"
+      },
+      {
+        "id": "q22",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "22",
+        "area": "Administração",
+        "enunciado": "De acordo com Maximiano (2011), o planejamento pode ser visto como a determinação da direção a ser seguida para se alcançar um resultado desejado ou como a determinação consciente de cursos de ação, isto é, dos rumos. Ele engloba decisões com base em objetivos, fatos e na estimativa do que ocorreria em cada alternativa. Planejar é, portanto, decidir antecipadamente o que fazer, de que maneira fazer, quando fazer e quem deve fazer. O tipo de planejamento focado no longo prazo, realizado pela cúpula organizacional, voltado aos aspectos amplos e globais da empresa, é denominado:",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Departamental."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Tático."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Contingencial."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Estratégico."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Conceitual."
+          }
+        ],
+        "resposta_correta": "D"
+      },
+      {
+        "id": "q23",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "23",
+        "area": "Administração",
+        "enunciado": "De acordo com Lacombe (2021), as definições de liderança, em geral, apresentam pelo menos dois aspectos comuns: a liderança está ligada a um fenômeno grupal, ou seja, envolve duas ou mais pessoas, e se trata de um processo de influência exercido de maneira intencional pelo líder. Há um tipo de liderança que assume que a influência ocorre em sentido duplo, pois o líder influencia seu liderado e é também influenciado por ele, de forma que é a partir dessa interação que o líder retira a maior parte das informações que necessita para exercer o seu papel. Consequentemente, o líder coloca-se como parceiro do liderado e, dessa maneira, não se torna necessária a utilização do poder formal, pois o liderado o segue voluntariamente pelo vínculo emocional estabelecido. Esse tipo de liderança é:",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Transacional."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Transformacional."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Situacional."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Coercitiva."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Liberal. 807_CE_01_NS_DM ADMINISTRAÇÃO 812"
+          }
+        ],
+        "resposta_correta": "D"
+      },
+      {
+        "id": "q24",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "24",
+        "area": "Administração",
+        "enunciado": "De acordo com Lacombe (2021), uma das maiores controvérsias sobre liderança diz respeito à possibilidade de identificar características para os líderes, isto é, à existência de traços comuns. Atualmente, não se fala em liderança como um traço psicológico, intrínseco a um indivíduo, que alguns têm sorte de ter e outros não, pois a liderança somente faz sentido quando é especificado para que fim e em que circunstâncias se espera que o líder deva agir. A Teoria do Caminho-Meta, por sua vez, afirma que os líderes devem ser flexíveis e, portanto, devem moldar o tipo de liderança à situação, envolvendo fatores contingenciais ambientais e fatores contingenciais do subordinado. Tendo por base a Teoria do Caminho-Meta, quando o perfil do líder é autoritário, e os liderados respeitam a sua autoridade, permitindo, assim, que a liderança imponha diretrizes específicas, regras e procedimentos que contribuem para a motivação, satisfação e desempenho, o tipo de liderança que está sendo empregado é denominado:",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Diretivo."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Persuasivo."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Democrático."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Orientado para realizações."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Consultivo-realizador."
+          }
+        ],
+        "resposta_correta": "C"
+      },
+      {
+        "id": "q25",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "25",
+        "area": "Administração",
+        "enunciado": "Conforme Maximiano (2011), a Teoria Neoclássica retomou diversos conceitos da Teoria Clássica da Administração, porém adotando uma visão mais moderna e aplicada à crescente complexidade organizacional, sem desconsiderar aspectos de outras escolas da Administração. Nesse sentido, a visão de ser humano adotada é a de homem organizacional e administrativo, que aceita incentivos mistos, tanto econômicos quanto sociais e simbólicos, para o alcance de uma melhor produtividade. São características condizentes com a Teoria Neoclássica, EXCETO:",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "O ser humano é racional, mas também social, sendo voltado para o alcance dos seus próprios objetivos e também dos objetivos da organização."
+          },
+          {
+            "alternativa": "B",
+            "texto": "A administração é um processo operacional composto por funções como: planejamento, organização, direção e controle."
+          },
+          {
+            "alternativa": "C",
+            "texto": "O ambiente interage com a organização e vice-versa. Assim, as características da própria organização estão relacionadas com as características do sistema no qual ela se insere. Portanto, as organizações devem ser controladas para se ajustar às características do ambiente."
+          },
+          {
+            "alternativa": "D",
+            "texto": "A cultura e o universo físico e biológico geram impactos no ambiente do administrador. Seja como ciência ou arte, a teoria administrativa não precisa englobar todo o conhecimento possível para que possa servir de fundamento científico aos princípios da Administração."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Como a administração envolve uma variedade de situações da organização, precisa ser fundamentada em princípios básicos que tenham valor preditivo."
+          }
+        ],
+        "resposta_correta": "E"
+      },
+      {
+        "id": "q26",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "26",
+        "area": "Marketing",
+        "enunciado": "De acordo com Yanaze (2021), o marketing não cria necessidades antes inexistentes, mas aciona as já estabelecidas, por meio do desenvolvimento, do lançamento e do posicionamento de produtos e serviços, para atender às necessidades semelhantes de um grupo relativamente homogêneo. Portanto, as necessidades do consumidor são o foco do marketing. A necessidade do consumidor:",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "É o estado de desconforto causado pela privação de algum elemento que desperta uma tendência a realizar determinado comportamento voltado à busca de satisfação."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Constitui-se de uma força que direciona e induz o indivíduo a uma ação. Ela pode decorrer de desejos não satisfeitos, que geram um estado desconfortável de tensão."
+          },
+          {
+            "alternativa": "C",
+            "texto": "É a força motriz de todo comportamento humano, que está sempre orientado por objetivos."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Trata-se do anseio de consumir determinado produto ou serviço em decorrência das ações das marcas e empresas, principalmente por suas ações promocionais. Também tem relação direta com a cultura e com os hábitos sociais."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Trata-se do desejo por produtos específicos apoiados pela capacidade de compra do consumidor. 807_CE_01_NS_DM ADMINISTRAÇÃO 812"
+          }
+        ],
+        "resposta_correta": "A"
+      },
+      {
+        "id": "q27",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "27",
+        "area": "Marketing",
+        "enunciado": "Segundo Yanaze (2021), o consumidor é o mesmo, seja comprando em uma loja, no shopping, através dos computadores (e-commerce) ou via celular (mobile commerce). O que difere é a receptividade das informações, o nível de influência do conteúdo, a mobilidade, a rapidez, a praticidade nas soluções de resultados, seja em pesquisas por informações ou nas próprias aquisições. São aspectos alinhados ao perfil do consumidor digital, EXCETO:",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "É exigente, pois, devido à facilidade de acesso a informações, ficou mais informado, apresentando um consumo consciente, conhecedor dos detalhes dos produtos e das soluções de pagamentos, entregas e garantias, bem como das opiniões de outros consumidores."
+          },
+          {
+            "alternativa": "B",
+            "texto": "É influenciado, pois as informações de imagens, vídeos, áudios e textos direcionam sua intenção de compras. Postagens relevantes referentes aos produtos ou soluções de aquisição são bem-aceitas e criam justificativas racionais para as compras. A classificação e os comentários de outros consumidores, clientes ou usuários permitem que o consumidor tome a decisão de compra de forma mais racional."
+          },
+          {
+            "alternativa": "C",
+            "texto": "É poderoso, pois, com as possibilidades de opinar, avaliar, elogiar, criticar e compartilhar suas experiências de compras, tem maior capacidade de influenciar outros consumidores, amigos, parentes ou seguidores em suas páginas sociais."
+          },
+          {
+            "alternativa": "D",
+            "texto": "É paciente, pois pesquisa bastante antes de comprar. Sendo assim, está mais tranquilo quanto às compras, pois as informações repassadas através de aplicativos ou chats são satisfatórias, de maneira que atrasos ou falhas nos produtos não o incomodam, pois tem plena confiança de que os problemas serão resolvidos."
+          },
+          {
+            "alternativa": "E",
+            "texto": "É prático, pois o mesmo relacionamento que ele tem com as pessoas no mundo digital espera ter com as marcas e empresas, desejando que apresentem ofertas ou promoções específicas ao seu perfil e mantenham um relacionamento exclusivo com ele."
+          }
+        ],
+        "resposta_correta": "B"
+      },
+      {
+        "id": "q28",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "28",
+        "area": "Marketing",
+        "enunciado": "De acordo com Yanaze (2022), o consumidor é a maior razão de existência das empresas. É, sem dúvida, o stakeholder mais importante do contexto empresarial. Em síntese, a empresa não deve criar e produzir algo se não tiver realizado previamente um estudo do comportamento do consumidor. O produto ou serviço deve moldar-se naturalmente à sua necessidade ou desejo iminente. O processo de compras sofre influência direta dos diferentes perfis de clientes, os quais, por sua vez, são influenciados por fatores culturais, sociais, pessoais e psicológicos. Quando uma empresa está planejando uma campanha de marketing para um novo produto alimentar destinado ao mercado global, deve considerar os fatores sociais e culturais que podem afetar a aceitação do produto. Assinale a alternativa que apresenta fatores sociais e culturais que podem influenciar a receptividade dos consumidores a esse produto em diferentes regiões do mundo.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Convergências de mídia social."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Cotação da moeda local."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Padrões alimentares e prioridades culinárias locais."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Categorização de sustentabilidade da empresa."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Modelo de logotipo da marca."
+          }
+        ],
+        "resposta_correta": "D"
+      },
+      {
+        "id": "q29",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "29",
+        "area": "Marketing",
+        "enunciado": "Tudo que a empresa faz e que tem impacto na percepção do consumidor deve ser planejado com o objetivo de desenvolver uma posição desejada, o que inclui não apenas decisões estratégicas relacionadas ao produto em si e à sua comunicação, mas também à sua marca, à sua política de preço e ao seu sistema de distribuição, entre outros aspectos. Uma maneira interessante de classificar os produtos é por meio dos hábitos de compra, visto que os produtos têm capacidade para assumir papéis e significados diferentes, em situações diversas de compra e consumo. Nesse sentido, produtos que requerem estratégias específicas para se transformar em produtos com outras conotações no ideário de consumo, de modo que os profissionais de marketing devem se esforçar para conscientizar os consumidores da real necessidade de aquisição, tais como seguros de carros, serviços hospitalares e blindagem veicular, são denominados produtos:",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "De conveniência."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Especiais."
+          },
+          {
+            "alternativa": "C",
+            "texto": "De compra comparada."
+          },
+          {
+            "alternativa": "D",
+            "texto": "De venda casada."
+          },
+          {
+            "alternativa": "E",
+            "texto": "De demanda negativa. 807_CE_01_NS_DM ADMINISTRAÇÃO 812"
+          }
+        ],
+        "resposta_correta": "E"
+      },
+      {
+        "id": "q30",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "30",
+        "area": "Administração",
+        "enunciado": "De acordo com Lacombe (2021), Douglas McGregor propôs as Teorias X e Y para descrever diferentes perspectivas sobre a natureza humana em relação à motivação para desempenho do trabalho nas organizações. Assinale a alternativa que apresenta a diferença fundamental entre essas duas teorias.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "A Teoria X propõe que os indivíduos são naturalmente motivados, autodirigidos e buscam a responsabilidade, enquanto a Teoria Y acredita que as pessoas são inerentemente preguiçosas, desmotivadas e evitam a responsabilidade."
+          },
+          {
+            "alternativa": "B",
+            "texto": "A Teoria X sugere que as pessoas são inerentemente boas, cooperativas e produtivas quando bem gerenciadas, enquanto a Teoria Y pressupõe que as pessoas têm uma inclinação natural para a rebeldia e a resistência à autoridade."
+          },
+          {
+            "alternativa": "C",
+            "texto": "A Teoria X sugere que as pessoas têm uma aversão inata ao trabalho e só vão elevar a produtividade sob ameaça ou coerção, enquanto a Teoria Y argumenta que o trabalho é inerentemente gratificante e as pessoas têm potencial para serem criativas e autodirigidas."
+          },
+          {
+            "alternativa": "D",
+            "texto": "A Teoria X sugere que as pessoas devem buscar elevar a criatividade e o empreendedorismo fora dos empregos tradicionais, enquanto a Teoria Y argumenta que o trabalho é inerentemente gratificante e as pessoas têm potencial para serem criativas e autodirigidas, mesmo em organizações formais."
+          },
+          {
+            "alternativa": "E",
+            "texto": "A Teoria X e a Teoria Y partem dos mesmos princípios acerca da produtividade no trabalho e não diferem em suas perspectivas sobre a compreensão da motivação humana."
+          }
+        ],
+        "resposta_correta": "E"
+      },
+      {
+        "id": "q32",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "32",
+        "area": "Administração",
+        "enunciado": "Conforme Brito (2016), governança corporativa é o sistema pelo qual as organizações são dirigidas, monitoradas e incentivadas, envolvendo práticas e relacionamentos entre os proprietários, conselhos de administração, diretoria e órgãos de controle. As práticas de governança corporativa visam alinhar os interesses dos envolvidos a fim de gerar valor para a organização. A governança corporativa surgiu no início dos anos 1990 nos Estados Unidos, um país com um mercado de capitais já desenvolvido. Ela é orientada a melhor disciplinar a relação entre acionistas (proprietários de empresas) e executivos (agentes, os responsáveis pelas empresas), em busca do alinhamento de ambos. São objetivos da governança corporativa: I. Aprimorar a transparência. II. Facilitar a penalização de executivos quando constatado o conflito de agência. III. Permitir o alinhamento entre os acionistas e executivos. IV. Facilitar o acesso de minoritários ao capital. Quais estão corretas?",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Apenas I, II e III."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Apenas I, II e IV."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Apenas I, III e IV."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Apenas II, III e IV."
+          },
+          {
+            "alternativa": "E",
+            "texto": "I, II, III e IV. 807_CE_01_NS_DM ADMINISTRAÇÃO 812"
+          }
+        ],
+        "resposta_correta": "B"
+      },
+      {
+        "id": "q33",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "33",
+        "area": "Administração",
+        "enunciado": "De acordo com Brito (2016), no mercado de capitais, quanto maiores a margem EBITDA e a capacidade de crescimento, maior será o múltiplo e, consequentemente, o valor da empresa. O que está por trás desse apreçamento que o mercado de capitais aponta é a capacidade de a empresa retornar o investimento em menor tempo. Sobre o tema, assinale a alternativa que apresenta o conceito correto de margem EBITDA.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Corresponde ao percentual de lucros antes dos juros, impostos, depreciação e amortização. Com ela, é possível saber quanto a empresa está gerando de caixa, considerando somente as suas atividades operacionais, já que não pondera os impactos financeiros e os impostos dentro do cálculo da geração de caixa."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Indica o período necessário de tempo para o lucro se igualar em relação ao valor de mercado das ações da companhia, isto é, o período de tempo necessário para o investidor reaver o capital aplicado na compra das ações da companhia."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Mede diretamente a rentabilidade de uma companhia em relação a um investimento realizado em ativos. O valor obtido demonstra a eficiência e a capacidade de gestão de uma companhia em termos de investimento e resultado."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Reflete o retorno obtido por uma companhia em relação a um investimento, seja por capital próprio ou de terceiros. Também é uma importante medida para avaliar o retorno sobre projetos."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Define-se como um modelo de precificação de ações com base em fluxo de caixa descontado que pressupõe crescimento de dividendos e uma taxa constante."
+          }
+        ],
+        "resposta_correta": "B"
+      },
+      {
+        "id": "q34",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "34",
+        "area": "Administração",
+        "enunciado": "Conforme Brito (2016), um dos recursos mais importantes a serem administrados em uma empresa é o financeiro. Uma boa gestão financeira proporciona maior competitividade e sobrevivência às empresas. Sendo assim, a administração financeira visa à maior rentabilidade possível sobre o investimento efetuado pelos sócios ou acionistas, pois é preciso utilizar os recursos da melhor maneira possível a fim de maximizar o retorno financeiro. Assinale a alternativa que apresenta uma técnica de investimento baseada no capital aplicado em relação a uma taxa de lucratividade, sendo utilizada para demonstrar ao investidor qual a taxa de desconto mínima necessária para que o projeto apresente rentabilidade superior a zero em relação ao capital aplicado.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Payback simples."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Payback descontado."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Valor Presente Líquido (VPL)."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Taxa Interna de Retorno (TIR)."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Custo médio ponderado."
+          }
+        ],
+        "resposta_correta": "E"
+      },
+      {
+        "id": "q35",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "35",
+        "area": "Administração",
+        "enunciado": "De acordo com Brito (2016), a administração do capital de giro é uma parte fundamental da gestão financeira de uma empresa, pois envolve o controle e a otimização dos recursos financeiros necessários para as operações diárias, visando à garantia de que a empresa tenha liquidez suficiente para cobrir suas obrigações de curto prazo. Em relação à natureza e às definições da administração do capital de giro, assinale a alternativa INCORRETA.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "O ciclo de caixa representa o período entre o pagamento aos fornecedores pela matéria-prima e o recebimento do pagamento dos clientes pela venda do produto. A redução do ciclo de caixa é crucial para otimizar o capital de giro."
+          },
+          {
+            "alternativa": "B",
+            "texto": "O capital de giro líquido é a diferença entre os ativos circulantes e os passivos circulantes. Um capital de giro líquido positivo indica que a empresa tem mais ativos circulantes do que passivos circulantes, o que é desejável para garantir a continuidade das operações."
+          },
+          {
+            "alternativa": "C",
+            "texto": "O ciclo operacional é o período de tempo necessário para converter os recursos investidos em estoques em caixa, passando pela produção, venda e recebimento do pagamento. Uma administração eficiente do capital de giro busca reduzir o ciclo operacional, melhorando a liquidez da empresa."
+          },
+          {
+            "alternativa": "D",
+            "texto": "A política de crédito refere-se às diretrizes estabelecidas pela empresa para conceder crédito aos clientes. Uma administração eficaz do capital de giro envolve encontrar um equilíbrio entre estender prazos para incentivar as vendas e garantir que os clientes paguem dentro de limites que não comprometam a saúde financeira da empresa."
+          },
+          {
+            "alternativa": "E",
+            "texto": "A gestão de estoques é responsável pela gestão dos recursos financeiros da empresa, incluindo o caixa, os investimentos de curto prazo e as operações bancárias. Uma boa gestão de estoques é fundamental para garantir a liquidez e a solidez financeira."
+          }
+        ],
+        "resposta_correta": "D"
+      },
+      {
+        "id": "q36",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "36",
+        "area": "Administração",
+        "enunciado": "O capital de giro é um recurso de rápida renovação que concebe a liquidez da operação disponível para a entidade, representando, portanto, os recursos disponíveis ou que se tomarão disponíveis a curto prazo, aplicados pela organização em seu ciclo operacional. Esse conceito enfatiza a natureza de curto prazo do capital de giro, que está presente nas decisões do dia a dia da empresa. Sobre esse tema, assinale a alternativa que representa o conceito adequado de capital de giro líquido.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "É a divisão do ativo circulante pelo passivo circulante, representando o valor percentual dos ativos circulantes em relação às dívidas de curto prazo."
+          },
+          {
+            "alternativa": "B",
+            "texto": "É a diferença entre o ativo circulante e o passivo circulante, representando o valor líquido dos ativos circulantes, deduzidas as dívidas de curto prazo."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Trata-se da diferença entre a soma do ativo circulante e ativo realizável a longo prazo pelo passivo exigível, representando o valor líquido dos ativos, deduzidas as dívidas com terceiros."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Demonstra a capacidade geral de solvência da empresa, pois considera a relação entre os bens e direitos de curto e longo prazos com suas obrigações de curto e longo prazos."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Relaciona o lucro líquido obtido com o total dos investimentos em ativos circulantes. Evidencia, portanto, o retorno sobre o ativo circulante por meio de sua relação com o lucro líquido."
+          }
+        ],
+        "resposta_correta": "E"
+      },
+      {
+        "id": "q37",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "37",
+        "area": "Administração",
+        "enunciado": "De acordo com Martins (2009), todas as empresas procuram, de uma forma ou de outra, obter uma vantagem competitiva em relação a seus concorrentes, e a oportunidade de atendê-los prontamente, no momento e na quantidade desejada, é facilitada por meio da administração eficaz dos estoques. A análise ABC é uma das formas mais usuais de examinar estoques. Essa análise consiste na verificação do consumo, em certo espaço de tempo, em valor monetário ou quantidade, dos itens de estoque, para que eles possam ser classificados em ordem decrescente de importância. São características da análise ABC: I. Aos itens mais importantes de todos, segundo a ótica do valor ou da quantidade, dá-se a denominação itens classe A, aos intermediários, itens classe B, e aos menos importantes, itens classe C. II. A experiência demonstra que poucos itens, de 10 a 20 do total, são da classe C, enquanto uma grande quantidade, em torno de 50, é da classe A e 30 a 40 são da classe B. III. Serve também para avaliar a imprescindibilidade do material do ponto de vista operacional, levando em conta a essencialidade para as fases operacionais da organização, a facilidade de aquisição e a possibilidade de substituição por outro equivalente. Quais estão corretas?",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Apenas I."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Apenas II."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Apenas I e II."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Apenas I e III."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Apenas II e III."
+          }
+        ],
+        "resposta_correta": "A"
+      },
+      {
+        "id": "q38",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "38",
+        "area": "Administração",
+        "enunciado": "Determinada organização está em processo de expansão de negócios. Dessa forma, está avaliando a possibilidade de obtenção de financiamento suplementar. Assinale a alternativa que apresenta corretamente o conceito de alavancagem financeira.",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Trata-se de uma estratégia de financiamento de curto prazo que não afeta o risco da empresa."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Abrange o emprego de capital próprio para financiar operações."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Refere-se exclusivamente à utilização de empréstimos de curto prazo."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Envolve a obrigatoriedade do lançamento de ações na Bolsa de Valores para captação de recursos financeiros."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Possibilita a ampliação dos retornos para os acionistas, mas aumenta também o risco financeiro da empresa. 807_CE_01_NS_DM ADMINISTRAÇÃO 812"
+          }
+        ],
+        "resposta_correta": "A"
+      },
+      {
+        "id": "q39",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "39",
+        "area": "Administração",
+        "enunciado": "O sistema de planejamento e controle de produção, parte integrante do sistema produtivo de informações, tem ênfase em matéria-prima, equipamentos, mão de obra e parceiros. Esse sistema vai ao encontro das condições do mercado e da estratégia da empresa. Um sistema de planejamento e controle de produção fornece informações para gerenciar os fluxos de matéria-prima e material em processo, de mão de obra e equipamentos, coordenando as atividades internas e externas com as dos parceiros e ajustando-as com as necessidades dos clientes. O planejamento e o controle da produção não tomam decisões ou modificam operações, apenas dão suporte para que os gestores façam mudanças com eficiência. São atividades típicas de gestão utilizadas pelo planejamento e controle da produção: I. Planejamento dos recursos, capacidade e disponibilidade para satisfazer a necessidade do mercado. II. Planejamento de entrada de matéria-prima e insumos em quantidades e tempos necessários para a produção. III. Operação improvisada caso algum problema inesperado aconteça. IV. Fornecimento de informações para a utilização do layout e das capacidades financeiras. Quais estão corretas?",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Apenas II e III."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Apenas III e IV."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Apenas I, II e IV."
+          },
+          {
+            "alternativa": "D",
+            "texto": "Apenas I, III e IV."
+          },
+          {
+            "alternativa": "E",
+            "texto": "I, II, III e IV."
+          }
+        ],
+        "resposta_correta": "C"
+      },
+      {
+        "id": "q40",
+        "banca": "IFRS",
+        "prova_id": "807_BASE_NS_DM",
+        "questao_numero": "40",
+        "area": "Administração",
+        "enunciado": "O layout de processo representa o arranjo físico das instalações de produção em uma empresa. Ele define como as máquinas, estações de trabalho e áreas de armazenamento serão organizadas no ambiente. O objetivo do layout de processo é elevar a eficiência da produção, reduzir os custos e otimizar o fluxo de trabalho. Existem vários tipos de layouts de processo, um para cada tipo de operações. A escolha do layout de processo correto depende das necessidades específicas de produção da empresa. O tipo de layout de processo mais adequado para um ambiente de produção onde produtos variados são fabricados em pequenas quantidades e as máquinas são agrupadas com base em suas funções análogas é:",
+        "alternativas": [
+          {
+            "alternativa": "A",
+            "texto": "Linear."
+          },
+          {
+            "alternativa": "B",
+            "texto": "Funcional."
+          },
+          {
+            "alternativa": "C",
+            "texto": "Em células de manufatura."
+          },
+          {
+            "alternativa": "D",
+            "texto": "De produto."
+          },
+          {
+            "alternativa": "E",
+            "texto": "Otimizado."
+          }
+        ],
+        "resposta_correta": "C"
+      }
+    ]
+  }

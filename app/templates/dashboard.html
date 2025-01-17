@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header mb-4">
+    <h1>Olá, {{ current_user.username }}!</h1>
+    <p class="text-muted">Continue seus estudos de onde parou</p>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Últimos Simulados</h5>
+                <a href="{{ url_for('main.simulados') }}" class="btn btn-sm btn-primary">Ver Todos</a>
+            </div>
+            <div class="card-body">
+                <div class="progress-stats">
+                    <div class="stat-item">
+                        <h3>85%</h3>
+                        <p>Média de Acertos</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>42</h3>
+                        <p>Questões Respondidas</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>3.5h</h3>
+                        <p>Tempo de Estudo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">Materias Favoritas</h5>
+            </div>
+            <div class="card-body">
+                <div class="subject-list">
+                    <a href="#" class="subject-item">
+                        <span class="badge bg-primary">Direito Constitucional</span>
+                        <span class="text-muted">89 questões</span>
+                    </a>
+                    <a href="#" class="subject-item">
+                        <span class="badge bg-success">Português</span>
+                        <span class="text-muted">65 questões</span>
+                    </a>
+                    <a href="#" class="subject-item">
+                        <span class="badge bg-info">Matemática</span>
+                        <span class="text-muted">43 questões</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Cadernos de Questões Recomendados</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for i in range(3) %}
+                    <div class="col-md-4">
+                        <div class="question-set-card">
+                            <h6>Português para Concursos</h6>
+                            <p class="text-muted">100 questões • Nível Médio</p>
+                            <div class="progress mb-2">
+                                <div class="progress-bar" role="progressbar" style="width: 25%"></div>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary">Continuar</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

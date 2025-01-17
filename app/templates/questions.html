@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Questões{% endblock %}
+
+{% block content %}
+<div class="questions-header d-flex justify-content-between align-items-center mb-4">
+    <h2>Banco de Questões</h2>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filterModal">
+        <i class="fas fa-filter"></i> Filtrar
+    </button>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <!-- Sidebar com filtros -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Filtros</h5>
+                <form id="filterForm">
+                    <div class="mb-3">
+                        <label class="form-label">Matérias</label>
+                        {% for subject in subjects %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="subjects" value="{{ subject.id }}">
+                            <label class="form-check-label">{{ subject.name }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Bancas</label>
+                        <select class="form-select" name="banca">
+                            <option value="">Todas</option>
+                            {% for banca in bancas %}
+                            <option value="{{ banca.id }}">{{ banca.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Ano</label>
+                        <select class="form-select" name="ano">
+                            <option value="">Todos</option>
+                            {% for ano in anos %}
+                            <option value="{{ ano }}">{{ ano }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Aplicar Filtros</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <!-- Lista de questões -->
+        <div class="questions-list">
+            {% for question in questions %}
+            <div class="card question-card mb-3">
+                <div class="card-body">
+                    <div class="question-meta d-flex justify-content-between mb-2">
+                        <span class="badge bg-primary">{{ question.subject }}</span>
+                        <small class="text-muted">{{ question.banca }} - {{ question.year }}</small>
+                    </div>
+                    <p class="question-text">{{ question.text }}</p>
+                    <div class="question-options">
+                        {% for option in question.options %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question{{ question.id }}" value="{{ option.id }}">
+                            <label class="form-check-label">{{ option.text }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="question-actions mt-3">
+                        <button class="btn btn-outline-primary btn-sm">Ver Resposta</button>
+                        <button class="btn btn-outline-secondary btn-sm">Ver Resolução</button>
+                        <button class="btn btn-outline-success btn-sm">
+                            <i class="fas fa-bookmark"></i> Salvar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Paginação -->
+        <nav aria-label="Navegação de páginas">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Próxima</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}
