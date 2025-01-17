@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termos de Uso</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Termos de Uso</h1>
+        
+        <div class="terms-content">
+            <h2>1. Aceitação dos Termos</h2>
+            <p>Ao acessar e usar este quiz, você concorda com estes termos de uso.</p>
+
+            <h2>2. Uso do Quiz</h2>
+            <p>Este quiz é destinado apenas para fins educacionais e de entretenimento.</p>
+
+            <h2>3. Privacidade</h2>
+            <p>Seus dados pessoais serão tratados conforme nossa política de privacidade.</p>
+
+            <h2>4. Responsabilidades</h2>
+            <p>O usuário é responsável pela veracidade das informações fornecidas.</p>
+
+            <h2>5. Modificações</h2>
+            <p>Reservamos o direito de modificar estes termos a qualquer momento.</p>
+        </div>
+
+        <div class="terms-footer">
+            <a href="{{ url_for('index') }}" class="btn">Voltar</a>
+        </div>
+    </div>
+</body>
+</html>

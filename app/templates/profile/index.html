@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Meu Perfil{% endblock %}
+
+{% block content %}
+<div class="profile-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="d-flex align-items-center">
+                    <div class="profile-avatar-lg">
+                        {% if current_user.avatar %}
+                            <img src="{{ current_user.avatar }}" alt="{{ current_user.username }}">
+                        {% else %}
+                            <div class="avatar-placeholder">
+                                {{ current_user.username[0]|upper }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="profile-info ms-4">
+                        <h1 class="mb-2">{{ current_user.username }}</h1>
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-graduation-cap me-2"></i>
+                            Estudante desde {{ current_user.created_at.strftime('%B %Y') }}
+                        </p>
+                        <div class="profile-badges">
+                            {% for badge in user_badges %}
+                            <span class="badge bg-{{ badge.type }} me-2" title="{{ badge.description }}">
+                                <i class="fas fa-{{ badge.icon }} me-1"></i>
+                                {{ badge.name }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                    <i class="fas fa-edit me-2"></i>Editar Perfil
+                </button>
+                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="fas fa-cog me-2"></i>Configurações
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Estatísticas -->
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Estatísticas</h5>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">{{ stats.total_questions }}</div>
+                            <div class="stat-label">Questões Respondidas</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">{{ stats.accuracy }}%</div>
+                            <div class="stat-label">Taxa de Acerto</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">{{ stats.simulados }}</div>
+                            <div class="stat-label">Simulados Realizados</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">{{ stats.streak }}</div>
+                            <div class="stat-label">Dias Seguidos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Matérias Favoritas -->
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Matérias Favoritas</h5>
+                    <button class="btn btn-sm btn-link">Ver todas</button>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        {% for subject in favorite_subjects %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ subject.name }}
+                            <span class="badge bg-primary rounded-pill">{{ subject.questions }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Atividades Recentes -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#activity">Atividades</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#achievements">Conquistas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#saved">Salvos</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="activity-timeline">
+                        {% for activity in activities %}
+                        <div class="activity-item">
+                            <div class="activity-icon bg-{{ activity.type }}">
+                                <i class="fas fa-{{ activity.icon }}"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-1">{{ activity.title }}</h6>
+                                    <small class="text-muted">{{ activity.time }}</small>
+                                </div>
+                                <p class="mb-0">{{ activity.description }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Edição de Perfil -->
+<div class="modal fade" id="editProfileModal">
+    <!-- ... código do modal ... -->
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Animações de entrada
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+            }
+        });
+    });
+
+    document.querySelectorAll('.card').forEach(card => observer.observe(card));
+});
+</script>
+{% endblock %}

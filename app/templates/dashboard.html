@@ -3,85 +3,161 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<div class="dashboard-header mb-4">
-    <h1>Olá, {{ current_user.username }}!</h1>
-    <p class="text-muted">Continue seus estudos de onde parou</p>
-</div>
-
-<div class="row">
-    <div class="col-md-8">
-        <div class="card mb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Últimos Simulados</h5>
-                <a href="{{ url_for('main.simulados') }}" class="btn btn-sm btn-primary">Ver Todos</a>
-            </div>
-            <div class="card-body">
-                <div class="progress-stats">
-                    <div class="stat-item">
-                        <h3>85%</h3>
-                        <p>Média de Acertos</p>
+<div class="dashboard-container">
+    <!-- Header com estatísticas principais -->
+    <div class="stats-overview">
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="stat-card bg-primary text-white">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
                     </div>
-                    <div class="stat-item">
-                        <h3>42</h3>
+                    <div class="stat-info">
+                        <h3>{{ stats.questions_answered }}</h3>
                         <p>Questões Respondidas</p>
                     </div>
-                    <div class="stat-item">
-                        <h3>3.5h</h3>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card bg-success text-white">
+                    <div class="stat-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>{{ stats.accuracy }}%</h3>
+                        <p>Taxa de Acerto</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card bg-info text-white">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>{{ stats.study_hours }}h</h3>
                         <p>Tempo de Estudo</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <div class="col-md-4">
-        <div class="card mb-4">
-            <div class="card-header">
-                <h5 class="mb-0">Materias Favoritas</h5>
-            </div>
-            <div class="card-body">
-                <div class="subject-list">
-                    <a href="#" class="subject-item">
-                        <span class="badge bg-primary">Direito Constitucional</span>
-                        <span class="text-muted">89 questões</span>
-                    </a>
-                    <a href="#" class="subject-item">
-                        <span class="badge bg-success">Português</span>
-                        <span class="text-muted">65 questões</span>
-                    </a>
-                    <a href="#" class="subject-item">
-                        <span class="badge bg-info">Matemática</span>
-                        <span class="text-muted">43 questões</span>
-                    </a>
+            <div class="col-md-3">
+                <div class="stat-card bg-warning text-white">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>{{ stats.streak }}</h3>
+                        <p>Dias Seguidos</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">Cadernos de Questões Recomendados</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    {% for i in range(3) %}
-                    <div class="col-md-4">
-                        <div class="question-set-card">
-                            <h6>Português para Concursos</h6>
-                            <p class="text-muted">100 questões • Nível Médio</p>
-                            <div class="progress mb-2">
-                                <div class="progress-bar" role="progressbar" style="width: 25%"></div>
-                            </div>
-                            <a href="#" class="btn btn-sm btn-outline-primary">Continuar</a>
+    <!-- Seção Principal -->
+    <div class="row mt-4">
+        <!-- Coluna da Esquerda -->
+        <div class="col-md-8">
+            <!-- Progresso por Matéria -->
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Progresso por Matéria</h5>
+                    <button class="btn btn-sm btn-primary">Ver Todas</button>
+                </div>
+                <div class="card-body">
+                    {% for subject in subjects %}
+                    <div class="subject-progress mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>{{ subject.name }}</span>
+                            <span>{{ subject.progress }}%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" 
+                                 style="width: {{ subject.progress }}%" 
+                                 aria-valuenow="{{ subject.progress }}" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="100"></div>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
             </div>
+
+            <!-- Últimas Atividades -->
+            <div class="card">
+                <div class="card-header"></div>
+                    <h5 class="mb-0">Últimas Atividades</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="activity-timeline">
+                        {% for activity in activities %}
+                        <div class="activity-item">
+                            <div class="activity-icon bg-{{ activity.type }}">
+                                <i class="fas fa-{{ activity.icon }}"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h6>{{ activity.title }}</h6>
+                                <p>{{ activity.description }}</p>
+                                <small class="text-muted">{{ activity.time }}</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coluna da Direita -->
+        <div class="col-md-4">
+            <!-- Próximo Simulado -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5>Próximo Simulado</h5>
+                    <div class="next-exam">
+                        <div class="exam-timer">
+                            <span id="examCountdown">2d 15h 30m</span>
+                        </div>
+                        <button class="btn btn-primary w-100 mt-3">Começar Agora</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metas Diárias -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Metas Diárias</h5>
+                </div>
+                <div class="card-body">
+                    <div class="daily-goals">
+                        {% for goal in daily_goals %}
+                        <div class="goal-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>{{ goal.name }}</span>
+                                <span>{{ goal.progress }}/{{ goal.target }}</span>
+                            </div>
+                            <div class="progress mt-2">
+                                <div class="progress-bar" role="progressbar" 
+                                     style="width: {{ (goal.progress/goal.target) * 100 }}%"></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Atualizar contador regressivo
+    function updateExamCountdown() {
+        // Implementar lógica do contador
+    }
+    
+    setInterval(updateExamCountdown, 1000);
+});
+</script>
 {% endblock %}

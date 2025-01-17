@@ -1,0 +1,84 @@
+{% macro intro() %}
+<div class="intro-section">
+    <p class="lead">Como parte de nossa missão em ajudar estudantes a melhorarem seu desempenho em provas, exames e concursos públicos, o ConQuiz trata algumas informações e Dados Pessoais de seus Usuários. Esta Política de Privacidade destina-se a ajudá-lo a entender melhor sobre esse tratamento.</p>
+    
+    <div class="definitions-card card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Definições Importantes</h5>
+            <div class="definitions-grid">
+                <div class="definition-item">
+                    <h6><i class="fas fa-user me-2"></i>Usuário</h6>
+                    <p>Toda pessoa que acessa o website do ConQuiz, podendo ser Visitante, Cadastrado ou Assinante.</p>
+                </div>
+                <div class="definition-item">
+                    <h6><i class="fas fa-database me-2"></i>Dados pessoais</h6>
+                    <p>Informação relacionada a pessoa natural identificada ou identificável.</p>
+                </div>
+                <div class="definition-item">
+                    <h6><i class="fas fa-shield-alt me-2"></i>Controlador</h6>
+                    <p>Pessoa jurídica a quem competem as decisões referentes ao tratamento de Dados Pessoais.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro quem_somos() %}
+<div class="card">
+    <div class="card-body">
+        <p class="lead">O ConQuiz é o responsável pelos dados que você compartilha conosco. Somos o "Controlador" dos seus Dados Pessoais conforme definição da LGPD – Lei Geral de Proteção de Dados.</p>
+        
+        <div class="company-info mt-4">
+            <h6><i class="fas fa-building me-2"></i>Dados da Empresa</h6>
+            <ul class="list-unstyled">
+                <li>ConQuiz Serviços Educacionais S.A.</li>
+                <li>CNPJ: XX.XXX.XXX/0001-XX</li>
+                <li>Endereço: [Endereço da Empresa]</li>
+                <li>Website: www.conquiz.com</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro dados_pessoais() %}
+<div class="card">
+    <div class="card-body">
+        <div class="data-types-grid">
+            <div class="data-type-item">
+                <i class="fas fa-user-circle fa-2x text-primary mb-3"></i>
+                <h6>Dados de Cadastro</h6>
+                <ul>
+                    <li>Nome e sobrenome</li>
+                    <li>Profissão</li>
+                    <li>Geolocalização</li>
+                    <li>Foto do perfil</li>
+                </ul>
+            </div>
+            
+            <div class="data-type-item">
+                <i class="fas fa-address-card fa-2x text-success mb-3"></i>
+                <h6>Dados de Contato</h6>
+                <ul>
+                    <li>E-mail</li>
+                    <li>Telefone</li>
+                    <li>Endereço</li>
+                </ul>
+            </div>
+            
+            <div class="data-type-item">
+                <i class="fas fa-desktop fa-2x text-info mb-3"></i>
+                <h6>Dados Técnicos</h6>
+                <ul>
+                    <li>Endereço IP</li>
+                    <li>Dispositivo usado</li>
+                    <li>Navegador</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+<!-- Continue com outros macros para cada seção da política -->

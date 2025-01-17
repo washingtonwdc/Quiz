@@ -1,0 +1,52 @@
+{% macro render_section(number, title, icon, content) %}
+<section id="section-{{ number }}" class="content-section" data-aos="fade-up">
+    <div class="section-header">
+        <div class="section-number">{{ number }}</div>
+        <div class="section-title">
+            <h2>{{ title }}</h2>
+            <i class="fas fa-{{ icon }} section-icon"></i>
+        </div>
+    </div>
+    <div class="section-content">
+        {{ content|safe }}
+    </div>
+</section>
+{% endmacro %}
+
+{% macro dados_pessoais() %}
+<div class="card">
+    <div class="card-body">
+        <div class="privacy-grid">
+            <div class="privacy-item">
+                <i class="fas fa-user text-primary"></i>
+                <h5>Dados de Cadastro</h5>
+                <ul>
+                    <li>Nome completo</li>
+                    <li>E-mail</li>
+                    <li>Senha (criptografada)</li>
+                </ul>
+            </div>
+            <div class="privacy-item">
+                <i class="fas fa-graduation-cap text-success"></i>
+                <h5>Dados de Estudo</h5>
+                <ul>
+                    <li>Histórico de questões</li>
+                    <li>Desempenho</li>
+                    <li>Preferências</li>
+                </ul>
+            </div>
+            <div class="privacy-item">
+                <i class="fas fa-cog text-info"></i>
+                <h5>Dados Técnicos</h5>
+                <ul>
+                    <li>Dispositivo</li>
+                    <li>Navegador</li>
+                    <li>Endereço IP</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+<!-- Continue com outros macros para cada seção -->

@@ -145,6 +145,44 @@ def simulado():
     questoes = [mongo.db.questoes.find_one({'_id': ObjectId(questao_id)}) for questao_id in questoes_ids]
     return render_template('simulado.html', questoes=questoes)
 
+@main.route('/simulado/novo')
+@login_required
+def novo_simulado():
+    questions = Question.get_random_questions(mongo, count=10)
+    return render_template('simulado.html', questions=questions)
+
+@main.route('/simulado/submit', methods=['POST'])
+@login_required
+def submit_simulado():
+    answers = {}
+    score = 0
+    total_questions = 0
+    
+    for key, value in request.form.items():
+        if key.startswith('question-'):
+            question_id = key.split('-')[1]
+            answers[question_id] = int(value)
+            
+            question = mongo.db.questions.find_one({'_id': ObjectId(question_id)})
+            if question and int(value) == question['correct_answer']:
+                score += 1
+            total_questions += 1
+    
+    # Salvar resultado do simulado
+    simulado_result = {
+        'user_id': current_user.id,
+        'date': datetime.now(),
+        'score': score,
+        'total_questions': total_questions,
+        'answers': answers,
+        'time_taken': request.form.get('time_taken', '')
+    }
+    
+    mongo.db.simulados.insert_one(simulado_result)
+    
+    flash(f'Simulado concluído! Pontuação: {score}/{total_questions}', 'success')
+    return redirect(url_for('main.dashboard'))
+
 @main.route('/questao/<questao_id>')
 def questao(questao_id):
     questao = mongo.db.questoes.find_one({'_id': ObjectId(questao_id)})
@@ -415,6 +453,68 @@ def update_profile():
     flash('Perfil atualizado com sucesso!', 'success')
     return redirect(url_for('main.profile'))
 
+@main.route('/settings')
+@login_required
+def settings():
+    user_data = mongo.db.users.find_one({'_id': ObjectId(current_user.id)})
+    return render_template('profile/settings.html', user=user_data)
+
+@main.route('/settings/update', methods=['POST'])
+@login_required
+def update_settings():
+    preferences = {
+        'study_mode': request.form.get('study_mode', 'random'),
+        'questions_per_quiz': int(request.form.get('questions_per_quiz', 10)),
+        'theme': request.form.get('theme', 'light')
+    }
+    
+    mongo.db.users.update_one(
+        {'_id': ObjectId(current_user.id)},
+        {'$set': {'preferences': preferences}}
+    )
+    
+    flash('Configurações atualizadas com sucesso!', 'success')
+    return redirect(url_for('main.settings'))
+
+@main.route('/terms')
+def terms():
+    return render_template('terms.html')
+
+@main.route('/accept-terms', methods=['POST'])
+@login_required
+def accept_terms():
+    user_id = current_user.id
+    mongo.db.users.update_one(
+        {'_id': ObjectId(user_id)},
+        {'$set': {'terms_accepted': True, 'terms_accepted_date': datetime.now()}}
+    )
+    flash('Termos aceitos com sucesso!', 'success')
+    return redirect(url_for('main.dashboard'))
+
+@main.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
+
+@main.route('/accept-privacy', methods=['POST'])
+@login_required
+def accept_privacy():
+    user_id = current_user.id
+    mongo.db.users.update_one(
+        {'_id': ObjectId(user_id)},
+        {'$set': {'privacy_accepted': True, 'privacy_accepted_date': datetime.now()}}
+    )
+    flash('Política de Privacidade aceita com sucesso!', 'success')
+    return redirect(url_for('main.dashboard'))
+
+@main.route('/about')
+def about():
+    stats = {
+        'users': '17M+',
+        'questions': '100K+',
+        'year_founded': '2024'
+    }
+    return render_template('about.html', stats=stats)
+
 def calculate_accuracy(user_id):
     answers = mongo.db.answers.find({'user_id': user_id})
     total = correct = 0
@@ -427,3 +527,11 @@ def calculate_accuracy(user_id):
 def calculate_study_hours(user_id):
     # Implementar cálculo de horas de estudo
     return 0  # Placeholder
+
+@main.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@main.route('/faq')
+def faq():
+    return render_template('faq.html')
