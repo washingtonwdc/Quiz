@@ -59,6 +59,11 @@ footer {
     --conquiz-secondary: #6c757d;
     --conquiz-success: #198754;
     --conquiz-warning: #ffc107;
+    --primary-color: #0d6efd;
+    --success-color: #198754;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --transition-speed: 0.3s;
 }
 
 .bg-conquiz {
@@ -300,6 +305,7 @@ footer {
 
 .progress-bar {
     background-color: var(--conquiz-primary);
+    transition: width 0.5s ease-in-out;
 }
 
 .badge {
@@ -422,4 +428,96 @@ footer {
     width: 2px;
     height: 100%;
     background: #e9ecef;
+}
+
+/* Animações */
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Classes de utilidade */
+.animate-slide {
+    animation: slideIn 0.5s ease-out;
+}
+
+.animate-fade {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.hover-lift {
+    transition: transform var(--transition-speed);
+}
+
+.hover-lift:hover {
+    transform: translateY(-3px);
+}
+
+/* Componentes específicos */
+.alternativa {
+    position: relative;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    transition: all var(--transition-speed);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.alternativa:hover {
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+.alternativa::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: transparent;
+    transition: background-color var(--transition-speed);
+}
+
+.alternativa.selected::before {
+    background-color: var(--primary-color);
+}
+
+.alternativa.correct::before {
+    background-color: var(--success-color);
+}
+
+.alternativa.incorrect::before {
+    background-color: var(--danger-color);
+}
+
+/* Timer styles */
+.timer-warning {
+    animation: pulse 1s infinite;
+    color: var(--danger-color) !important;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .alternativa {
+        margin-bottom: 0.5rem;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+    .btn-group .btn {
+        margin-bottom: 0.5rem;
+    }
 }

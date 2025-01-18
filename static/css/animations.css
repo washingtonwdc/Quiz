@@ -1,0 +1,83 @@
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideLeft {
+    from { transform: translateX(20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideRight {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Classes de utilidade para animações */
+.animate-fade-in { animation: fadeIn 0.3s ease-out; }
+.animate-slide-up { animation: slideUp 0.3s ease-out; }
+.animate-slide-down { animation: slideDown 0.3s ease-out; }
+.animate-slide-left { animation: slideLeft 0.3s ease-out; }
+.animate-slide-right { animation: slideRight 0.3s ease-out; }
+.animate-pulse { animation: pulse 1s infinite; }
+.animate-bounce { animation: bounce 1s infinite; }
+.animate-shake { animation: shake 0.5s; }
+.animate-rotate { animation: rotate 1s linear infinite; }
+
+/* Animações condicionais */
+.animate-on-hover:hover {
+    animation: pulse 0.3s;
+}
+
+.animate-on-click:active {
+    animation: bounce 0.3s;
+}
+
+.animate-on-error {
+    animation: shake 0.5s;
+}
+
+/* Transições suaves */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+.transition-transform {
+    transition: transform 0.3s ease;
+}
+
+.transition-opacity {
+    transition: opacity 0.3s ease;
+}
