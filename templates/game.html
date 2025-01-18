@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid game-container">
+    <div class="row">
+        <!-- Barra de Status -->
+        <div class="col-12 status-bar bg-dark text-light py-2 fixed-top">
+            <div class="container d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <span class="badge bg-primary me-2">Questão {{ current_question }}/{{ total_questions }}</span>
+                    <div class="progress" style="width: 200px">
+                        <div class="progress-bar" style="width: {{ progress }}%"></div>
+                    </div>
+                </div>
+                <div class="timer">
+                    <i class="fas fa-clock"></i> <span id="countdown">00:00</span>
+                </div>
+                <div class="score">
+                    <i class="fas fa-star"></i> Score: <span id="current-score">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Área do Jogo -->
+        <div class="col-12 game-area mt-5 pt-4">
+            <div class="container">
+                <div class="card question-card">
+                    <div class="card-body">
+                        <h2 class="question-text mb-4">{{ question.text }}</h2>
+                        <div class="options-container">
+                            {% for option in question.options %}
+                            <button class="btn btn-outline-primary btn-lg btn-block mb-3 option-btn" 
+                                    data-option="{{ option.id }}">
+                                {{ option.text }}
+                            </button>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Barra de Ações -->
+        <div class="col-12 action-bar bg-light py-3 fixed-bottom">
+            <div class="container d-flex justify-content-between align-items-center">
+                <button class="btn btn-outline-secondary" id="hint-btn">
+                    <i class="fas fa-lightbulb"></i> Dica
+                    <span class="badge bg-warning">2</span>
+                </button>
+                <div class="btn-group">
+                    <button class="btn btn-danger" id="skip-btn">
+                        <i class="fas fa-forward"></i> Pular
+                    </button>
+                    <button class="btn btn-success" id="confirm-btn" disabled>
+                        <i class="fas fa-check"></i> Confirmar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Dica -->
+<div class="modal fade" id="hintModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Dica</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>{{ question.hint }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block styles %}
+<style>
+.game-container {
+    min-height: 100vh;
+    padding-top: 60px;
+    padding-bottom: 80px;
+}
+
+.question-card {
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.option-btn {
+    width: 100%;
+    text-align: left;
+    padding: 15px;
+    transition: all 0.3s;
+}
+
+.option-btn:hover {
+    transform: translateX(10px);
+}
+
+.option-btn.selected {
+    background-color: #007bff;
+    color: white;
+}
+
+.timer {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.status-bar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.action-bar {
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let timeLeft = {{ time_limit }};
+let selectedOption = null;
+
+// Timer
+function updateTimer() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    document.getElementById('countdown').textContent = 
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    
+    if (timeLeft <= 0) {
+        endGame();
+    } else {
+        timeLeft--;
+    }
+}
+
+setInterval(updateTimer, 1000);
+
+// Opções
+document.querySelectorAll('.option-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedOption = btn.dataset.option;
+        document.getElementById('confirm-btn').disabled = false;
+    });
+});
+
+// Ações
+document.getElementById('hint-btn').addEventListener('click', () => {
+    new bootstrap.Modal(document.getElementById('hintModal')).show();
+});
+
+document.getElementById('confirm-btn').addEventListener('click', () => {
+    if (selectedOption) {
+        submitAnswer(selectedOption);
+    }
+});
+
+function submitAnswer(optionId) {
+    fetch('/api/submit-answer', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            questionId: {{ question.id }},
+            answerId: optionId
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.correct) {
+            showSuccess();
+        } else {
+            showError();
+        }
+    });
+}
+
+function endGame() {
+    window.location.href = "{{ url_for('resultado_game', game_id=game.id) }}";
+}
+</script>
+{% endblock %}
+{% endblock %}

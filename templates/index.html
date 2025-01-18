@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block title %}ConQuiz - Seu Portal de Estudos{% endblock %}
+
+{% block content %}
+<!-- Hero Section com Background -->
+<div class="hero-section text-center py-5 mb-5">
+    <div class="container">
+        <h1 class="display-3 fw-bold">Conquiste sua aprovação</h1>
+        <p class="lead mb-4">Prepare-se com o melhor conteúdo para concursos públicos, OAB, ENEM e muito mais!</p>
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-6">
+                <form class="search-form" action="{{ url_for('busca') }}" method="GET">
+                    <div class="input-group input-group-lg">
+                        <input type="search" class="form-control" placeholder="O que você quer estudar hoje?" name="q">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Atalhos Rápidos -->
+<div class="container mb-5">
+    <div class="quick-access">
+        <div class="row g-4">
+            <div class="col-6 col-md-3">
+                <a href="{{ url_for('simulados.index') }}" class="quick-link">
+                    <div class="card h-100 text-center hover-effect">
+                        <div class="card-body">
+                            <i class="fas fa-tasks fa-2x text-primary mb-3"></i>
+                            <h5>Simulados</h5>
+                            <p class="small text-muted">Pratique com questões</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="{{ url_for('exames.index') }}" class="quick-link">
+                    <div class="card h-100 text-center hover-effect">
+                        <div class="card-body">
+                            <i class="fas fa-file-alt fa-2x text-success mb-3"></i>
+                            <h5>Exames</h5>
+                            <p class="small text-muted">Próximas provas</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="{{ url_for('bancas.index') }}" class="quick-link">
+                    <div class="card h-100 text-center hover-effect">
+                        <div class="card-body">
+                            <i class="fas fa-book fa-2x text-info mb-3"></i>
+                            <h5>Material</h5>
+                            <p class="small text-muted">Conteúdo de estudo</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-6 col-md-3">
+                <a href="{{ url_for('perfil') }}" class="quick-link">
+                    <div class="card h-100 text-center hover-effect">
+                        <div class="card-body">
+                            <i class="fas fa-chart-line fa-2x text-warning mb-3"></i>
+                            <h5>Progresso</h5>
+                            <p class="small text-muted">Seu desempenho</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Seção de Destaques -->
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="feature-card card h-100">
+                <div class="card-body text-center">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-graduation-cap fa-3x text-primary"></i>
+                    </div>
+                    <h5 class="card-title">Estude do seu jeito</h5>
+                    <p class="card-text">Materiais personalizados e adaptados ao seu ritmo de estudo</p>
+                    <a href="{{ url_for('bancas.index') }}" class="btn btn-outline-primary">Começar agora</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="feature-card card h-100">
+                <div class="card-body text-center">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-tasks fa-3x text-primary"></i>
+                    </div>
+                    <h5 class="card-title">Simulados Online</h5>
+                    <p class="card-text">Teste seus conhecimentos com questões atualizadas</p>
+                    <a href="{{ url_for('simulados.index') }}" class="btn btn-outline-primary">Fazer simulado</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="feature-card card h-100">
+                <div class="card-body text-center">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-chart-line fa-3x text-primary"></i>
+                    </div>
+                    <h5 class="card-title">Análise de Desempenho</h5>
+                    <p class="card-text">Acompanhe seu progresso com estatísticas detalhadas</p>
+                    <a href="{{ url_for('perfil') }}" class="btn btn-outline-primary">Ver progresso</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Próximos Concursos -->
+<div class="container mb-5">
+    <h2 class="text-center mb-4">Próximos Concursos</h2>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card concurso-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">Polícia Federal</h5>
+                        <span class="badge bg-primary">Em breve</span>
+                    </div>
+                    <p class="card-text">1.500 vagas | Salário inicial: R$ 12.522,50</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar" role="progressbar" style="width: 75%"></div>
+                    </div>
+                    <a href="{{ url_for('concursos.detalhe', concurso_id='pf') }}" class="btn btn-primary">Saiba mais</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card concurso-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">Receita Federal</h5>
+                        <span class="badge bg-success">Inscrições Abertas</span>
+                    </div>
+                    <p class="card-text">699 vagas | Salário inicial: R$ 21.029,09</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 90%"></div>
+                    </div>
+                    <a href="{{ url_for('concursos.detalhe', concurso_id='rf') }}" class="btn btn-primary">Saiba mais</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Estatísticas -->
+<div class="bg-light py-5 mb-5">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 mb-4">
+                <div class="stats-item">
+                    <i class="fas fa-users fa-2x text-primary mb-3"></i>
+                    <h3 class="counter">5000+</h3>
+                    <p>Alunos Ativos</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="stats-item">
+                    <i class="fas fa-book fa-2x text-primary mb-3"></i>
+                    <h3 class="counter">1000+</</h3>
+                    <p>Questões</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="stats-item">
+                    <i class="fas fa-check-circle fa-2x text-primary mb-3"></i>
+                    <h3 class="counter">500+</h3>
+                    <p>Aprovações</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="stats-item">
+                    <i class="fas fa-star fa-2x text-primary mb-3"></i>
+                    <h3 class="counter">4.8</h3>
+                    <p>Avaliação Média</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Font Awesome para ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock %}
+
+{% block styles %}
+<style>
+.quick-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.hover-effect {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hover-effect:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.quick-access {
+    margin-top: -30px;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .quick-access {
+        margin-top: 20px;
+    }
+}
+</style>
+{% endblock %}

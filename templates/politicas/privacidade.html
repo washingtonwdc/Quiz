@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-sm">
+                <div class="card-body p-5">
+                    <h1 class="mb-4">Política de Privacidade</h1>
+                    <p class="text-muted">Última atualização: {{ now.strftime('%d/%m/%Y') }}</p>
+
+                    <section class="mb-5">
+                        <h2 class="h4">1. Coleta de Dados</h2>
+                        <p>Coletamos os seguintes tipos de informações:</p>
+                        <ul>
+                            <li>Informações de cadastro (nome, e-mail, etc.)</li>
+                            <li>Dados de uso da plataforma</li>
+                            <li>Informações de desempenho em simulados</li>
+                            <li>Preferências de estudo</li>
+                        </ul>
+                    </section>
+
+                    <section class="mb-5">
+                        <h2 class="h4">2. Uso dos Dados</h2>
+                        <p>Utilizamos seus dados para:</p>
+                        <ul>
+                            <li>Personalizar sua experiência de estudo</li>
+                            <li>Melhorar nossos serviços</li>
+                            <li>Enviar atualizações relevantes</li>
+                            <li>Gerar estatísticas anônimas</li>
+                        </ul>
+                    </section>
+
+                    <section class="mb-5">
+                        <h2 class="h4">3. Compartilhamento</h2>
+                        <p>Seus dados pessoais não são vendidos ou compartilhados com terceiros, exceto:</p>
+                        <ul>
+                            <li>Com seu consentimento explícito</li>
+                            <li>Para cumprir obrigações legais</li>
+                            <li>Para proteger nossos direitos</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

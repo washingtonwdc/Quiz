@@ -1,0 +1,33 @@
+.progress {
+    height: 25px;
+    border-radius: 15px;
+}
+
+.progress-bar {
+    background-color: #28a745;
+    transition: width 0.6s ease;
+}
+
+.stats {
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+.stats p {
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.list-group-item {
+    border-left: 4px solid #007bff;
+    margin-bottom: 10px;
+}
+
+.list-group-item h6 {
+    color: #007bff;
+    margin-bottom: 5px;
+}
+
+.list-group-item small {
+    color: #666;
+}

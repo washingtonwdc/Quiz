@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ConQuiz - Portal de Estudos{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">ConQuiz</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('concursos.index') }}">Concursos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('exames.index') }}">Exames</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('bancas.index') }}">Bancas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('simulados.index') }}">Simulados</a>
+                    </li>
+                </ul>
+                <form class="d-flex" action="{{ url_for('busca') }}" method="GET">
+                    <input class="form-control me-2" type="search" placeholder="Buscar..." name="q">
+                    <button class="btn btn-light" type="submit">Buscar</button>
+                </form>
+                <ul class="navbar-nav ms-auto">
+                    {% if session.get('user_id') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('perfil') }}">Meu Perfil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('logout') }}">Sair</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login') }}">Entrar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('register') }}">Cadastrar</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer mt-auto py-5 bg-dark text-light">
+        <div class="container">
+            <div class="row">
+                <!-- Sobre -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-primary mb-3">ConQuiz</h5>
+                    <p class="mb-3">Sua plataforma completa de preparação para concursos públicos, OAB, ENEM e muito mais.</p>
+                    <div class="social-links">
+                        <a href="#" class="me-2 text-light"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="me-2 text-light"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="me-2 text-light"><i class="fab fa-youtube fa-lg"></i></a>
+                        <a href="#" class="me-2 text-light"><i class="fab fa-linkedin fa-lg"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links Rápidos -->
+                <div class="col-md-2 mb-4">
+                    <h5 class="text-primary mb-3">Links Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{{ url_for('simulados.index') }}" class="text-light text-decoration-none">Simulados</a></li>
+                        <li class="mb-2"><a href="{{ url_for('exames.index') }}" class="text-light text-decoration-none">Exames</a></li>
+                        <li class="mb-2"><a href="{{ url_for('concursos.index') }}" class="text-light text-decoration-none">Concursos</a></li>
+                        <li class="mb-2"><a href="{{ url_for('bancas.index') }}" class="text-light text-decoration-none">Bancas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Suporte -->
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-primary mb-3">Suporte</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            <a href="mailto:suporte@conquiz.com" class="text-light text-decoration-none">suporte@conquiz.com</a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fab fa-whatsapp me-2"></i>
+                            <a href="https://wa.me/5511999999999" class="text-light text-decoration-none">(11) 99999-9999</a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-clock me-2"></i>
+                            <span>Seg - Sex: 9h às 18h</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-primary mb-3">Newsletter</h5>
+                    <p class="mb-3">Receba novidades e dicas de estudo</p>
+                    <form id="newsletter-form" class="mb-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Seu e-mail">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <hr class="border-secondary mt-4 mb-4">
+
+            <!-- Sub-footer -->
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; {{ now.year }} ConQuiz. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item">
+                            <a href="{{ url_for('termos') }}" class="text-light text-decoration-none">Termos de Uso</a>
+                        </li>
+                        <li class="list-inline-item">•</li>
+                        <li class="list-inline-item">
+                            <a href="{{ url_for('privacidade') }}" class="text-light text-decoration-none">Política de Privacidade</a>
+                        </li>
+                        <li class="list-inline-item">•</li>
+                        <li class="list-inline-item">
+                            <a href="{{ url_for('cookies') }}" class="text-light text-decoration-none">Cookies</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+    .footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .footer a:hover {
+        color: var(--bs-primary) !important;
+        transition: color 0.3s ease;
+    }
+
+    .social-links a {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+        background: var(--bs-primary);
+        transform: translateY(-3px);
+    }
+
+    #newsletter-form .input-group {
+        border-radius: 25px;
+        overflow: hidden;
+    }
+
+    #newsletter-form .form-control {
+        border: none;
+        padding-left: 20px;
+    }
+
+    #newsletter-form .btn {
+        border-radius: 0 25px 25px 0;
+    }
+
+    @media (max-width: 768px) {
+        .footer .col-md-3,
+        .footer .col-md-2,
+        .footer .col-md-4 {
+            text-align: center;
+        }
+        
+        .social-links {
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+    }
+    </style>
+
+    <script>
+    document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Implementar lógica de inscrição na newsletter
+        const email = this.querySelector('input[type="email"]').value;
+        alert(`Inscrição realizada com sucesso para: ${email}`);
+    });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

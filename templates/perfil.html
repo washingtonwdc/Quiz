@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Perfil Principal -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <img src="{{ user.avatar_url|default('/static/img/default-avatar.png') }}" 
+                         class="rounded-circle mb-3" style="width: 150px; height: 150px;">
+                    <h4>{{ user.name }}</h4>
+                    <p class="text-muted">Membro desde {{ user.created_at.strftime('%d/%m/%Y') }}</p>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarPerfil">
+                            <i class="fas fa-edit"></i> Editar Perfil
+                        </button>
+                        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#configuracoes">
+                            <i class="fas fa-cog"></i> Configurações
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conquistas -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-trophy"></i> Conquistas</h5>
+                </div>
+                <div class="card-body">
+                    <div class="achievement-grid">
+                        {% for badge in user.badges %}
+                        <div class="achievement-item" data-bs-toggle="tooltip" title="{{ badge.description }}">
+                            <i class="{{ badge.icon }} fa-2x {{ 'text-muted' if not badge.earned }}"></i>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estatísticas e Progresso -->
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-chart-line"></i> Desempenho Geral</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Atividades Recentes -->
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="fas fa-history"></i> Atividades Recentes</h5>
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-outline-primary active">Todos</button>
+                        <button class="btn btn-sm btn-outline-primary">Simulados</button>
+                        <button class="btn btn-sm btn-outline-primary">Exames</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="timeline">
+                        {% for activity in activities %}
+                        <div class="timeline-item">
+                            <div class="timeline-date">{{ activity.date }}</div>
+                            <div class="timeline-content">
+                                <h6>{{ activity.title }}</h6>
+                                <p>{{ activity.description }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Editar Perfil -->
+<div class="modal fade" id="editarPerfil" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Perfil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="profileForm">
+                    <div class="mb-3">
+                        <label class="form-label">Nome</label>
+                        <input type="text" class="form-control" value="{{ user.name }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Bio</label>
+                        <textarea class="form-control">{{ user.bio }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Avatar</label>
+                        <input type="file" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Gráfico de desempenho
+const ctx = document.getElementById('performanceChart').getContext('2d');
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+        datasets: [{
+            label: 'Progresso',
+            data: [65, 70, 75, 72, 80, 85],
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }]
+    }
+});
+</script>
+
+<style>
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    text-align: center;
+}
+
+.achievement-item {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: #f8f9fa;
+}
+
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 20px;
+}
+
+.timeline-date {
+    font-weight: bold;
+    color: #6c757d;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background-color: #dee2e6;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #007bff;
+}
+</style>
+{% endblock %}
+{% endblock %}

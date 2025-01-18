@@ -1,0 +1,261 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Resumo Geral -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">Resultado do Simulado</h3>
+            <div>
+                <button class="btn btn-light btn-sm me-2" onclick="compartilharResultado()">
+                    <i class="fas fa-share-alt"></i> Compartilhar
+                </button>
+                <button class="btn btn-light btn-sm" onclick="baixarRelatorio()">
+                    <i class="fas fa-download"></i> Baixar PDF
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 text-center mb-4">
+                    <div class="display-1 mb-2">{{ percentual_acertos }}%</div>
+                    <p class="text-muted">Aproveitamento</p>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-6 col-md-3 text-center mb-3">
+                            <h4>{{ total_questoes }}</h4>
+                            <p class="text-muted">Questões</p>
+                        </div>
+                        <div class="col-6 col-md-3 text-center mb-3">
+                            <h4 class="text-success">{{ acertos }}</h4>
+                            <p class="text-muted">Acertos</p>
+                        </div>
+                        <div class="col-6 col-md-3 text-center mb-3">
+                            <h4 class="text-danger">{{ erros }}</h4>
+                            <p class="text-muted">Erros</p>
+                        </div>
+                        <div class="col-6 col-md-3 text-center mb-3">
+                            <h4>{{ tempo_total }}</h4>
+                            <p class="text-muted">Tempo Total</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Análise Detalhada -->
+    <div class="row mb-4">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-pie"></i> Desempenho por Área
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="graficoAreas"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-clock"></i> Tempo por Questão
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="graficoTempo"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparativo -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-users"></i> Comparativo com Outros Candidatos
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="graficoComparativo"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-trophy"></i> Ranking de Desempenho
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="ranking-stats">
+                        <div class="text-center mb-4">
+                            <h1 class="display-4">{{ resultado.posicao_ranking }}º</h1>
+                            <p class="text-muted">Entre {{ resultado.total_participantes }} participantes</p>
+                        </div>
+                        <div class="progress mb-3" style="height: 25px;">
+                            <div class="progress-bar bg-success" style="width: {{ resultado.percentil }}%">
+                                Melhor que {{ resultado.percentil }}% dos candidatos
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Análise de Erros e Recomendações -->
+    <div class="row">
+        <div class="col-md-7">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-search"></i> Análise de Erros
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Questão</th>
+                                    <th>Área</th>
+                                    <th>Tempo Gasto</th>
+                                    <th>Dificuldade</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for erro in resultado.erros %}
+                                <tr>
+                                    <td>#{{ erro.questao }}</td>
+                                    <td>{{ erro.area }}</td>
+                                    <td>{{ erro.tempo }}</td>
+                                    <td>
+                                        <div class="progress" style="height: 15px;">
+                                            <div class="progress-bar bg-{{ erro.dificuldade_class }}" 
+                                                 style="width: {{ erro.dificuldade }}%">
+                                                {{ erro.dificuldade }}%
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary" onclick="verQuestao({{ erro.questao }})">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <!-- Recomendações -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-lightbulb"></i> Recomendações Personalizadas
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h6>Pontos Fortes</h6>
+                        <ul class="list-group">
+                            {% for ponto in resultado.pontos_fortes %}
+                            <li class="list-group-item">
+                                <i class="fas fa-check-circle text-success"></i> {{ ponto }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="mb-4">
+                        <h6>Pontos a Melhorar</h6>
+                        <ul class="list-group">
+                            {% for ponto in resultado.pontos_melhorar %}
+                            <li class="list-group-item">
+                                <i class="fas fa-exclamation-circle text-warning"></i> {{ ponto }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div>
+                        <h6>Material Recomendado</h6>
+                        <div class="list-group">
+                            {% for material in resultado.materiais_recomendados %}
+                            <a href="{{ material.url }}" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">{{ material.titulo }}</h6>
+                                    <small class="text-muted">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </small>
+                                </div>
+                                <p class="mb-1">{{ material.descricao }}</p>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Configuração dos gráficos
+const configAreas = {
+    type: 'radar',
+    data: {
+        labels: {{ resultado.areas|map(attribute='nome')|list|tojson }},
+        datasets: [{
+            label: 'Seu Desempenho',
+            data: {{ resultado.areas|map(attribute='percentual')|list|tojson }},
+            fill: true,
+            backgroundColor: 'rgba(13, 110, 253, 0.2)',
+            borderColor: 'rgb(13, 110, 253)',
+            pointBackgroundColor: 'rgb(13, 110, 253)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgb(13, 110, 253)'
+        }]
+    },
+    options: {
+        scales: {
+            r: {
+                min: 0,
+                max: 100,
+                beginAtZero: true
+            }
+        }
+    }
+};
+
+// Inicialização dos gráficos
+new Chart(document.getElementById('graficoAreas'), configAreas);
+// ... outras inicializações de gráficos ...
+
+function compartilharResultado() {
+    // Implementar compartilhamento
+}
+
+function baixarRelatorio() {
+    // Implementar download do PDF
+}
+
+function verQuestao(id) {
+    // Implementar visualização da questão
+}
+</script>
+{% endblock %}
+{% endblock %}

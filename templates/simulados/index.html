@@ -1,0 +1,465 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Tabs de navegação -->
+    <ul class="nav nav-tabs mb-4" id="simuladoTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="andamento-tab" data-bs-toggle="tab" href="#andamento">
+                <i class="fas fa-clock"></i> Em Andamento
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="novo-tab" data-bs-toggle="tab" href="#novo">
+                <i class="fas fa-plus"></i> Novo Simulado
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="historico-tab" data-bs-toggle="tab" href="#historico">
+                <i class="fas fa-history"></i> Histórico
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="simuladoTabsContent">
+        <!-- Tab: Em Andamento -->
+        <div class="tab-pane fade show active" id="andamento">
+            {% if simulado_atual %}
+            <div class="card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-3">
+                            <div class="d-flex align-items-center">
+                                <div class="progress-circle" data-value="{{ simulado_atual.progresso }}">
+                                    <span class="progress-circle-value">{{ simulado_atual.progresso }}%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6"></div>
+                            <h4>{{ simulado_atual.titulo }}</h4>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>{{ simulado_atual.respondidas }}/{{ simulado_atual.total_questoes }}</span>
+                                    <small>Respondidas</small>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-clock text-warning"></i>
+                                    <span>{{ simulado_atual.tempo_restante }}</span>
+                                    <small>Restante</small>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-bullseye text-info"></i>
+                                    <span>{{ simulado_atual.acertos }}</span>
+                                    <small>Acertos</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-end">
+                            <a href="{{ url_for('simulados.questao', numero=simulado_atual.respondidas + 1) }}" 
+                               class="btn btn-primary btn-lg">
+                                <i class="fas fa-play-circle"></i> Continuar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <img src="{{ url_for('static', filename='img/empty-state.svg') }}" alt="Nenhum simulado" class="mb-3" style="width: 200px;">
+                <h4>Nenhum simulado em andamento</h4>
+                <p class="text-muted">Inicie um novo simulado para começar seus estudos</p>
+                <button class="btn btn-primary" onclick="document.getElementById('novo-tab').click()">
+                    <i class="fas fa-plus"></i> Criar Simulado
+                </button>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Tab: Novo Simulado -->
+        <div class="tab-pane fade" id="novo">
+            <div class="card">
+                <div class="card-body">
+                    <form id="novoSimuladoForm" class="needs-validation" novalidate>
+                        <!-- Tipo de Simulado -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <h5 class="mb-3">Tipo de Simulado</h5>
+                                <div class="btn-group w-100" role="group">
+                                    <input type="radio" class="btn-check" name="tipo" id="tipo1" value="completo" required>
+                                    <label class="btn btn-outline-primary" for="tipo1">
+                                        <i class="fas fa-book"></i>
+                                        <span class="d-block">Completo</span>
+                                        <small class="d-block text-muted">Todas as matérias</small>
+                                    </label>
+
+                                    <input type="radio" class="btn-check" name="tipo" id="tipo2" value="especifico">
+                                    <label class="btn btn-outline-primary" for="tipo2">
+                                        <i class="fas fa-bookmark"></i>
+                                        <span class="d-block">Por Matéria</span>
+                                        <small class="d-block text-muted">Matéria específica</small>
+                                    </label>
+
+                                    <input type="radio" class="btn-check" name="tipo" id="tipo3" value="personalizado">
+                                    <label class="btn btn-outline-primary" for="tipo3">
+                                        <i class="fas fa-cog"></i>
+                                        <span class="d-block">Personalizado</span>
+                                        <small class="d-block text-muted">Configure tudo</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Configurações -->
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Matéria</label>
+                                <select class="form-select" id="materia" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="1">Direito Constitucional</option>
+                                    <option value="2">Direito Administrativo</option>
+                                    <option value="3">Direito Penal</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Quantidade de Questões</label>
+                                <select class="form-select" id="qtd_questoes" required>
+                                    <option value="30">30 questões</option>
+                                    <option value="60" selected>60 questões</option>
+                                    <option value="90">90 questões</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Tempo de Prova</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="horas" placeholder="Horas" min="0" max="12" required>
+                                    <span class="input-group-text">:</span>
+                                    <input type="number" class="form-control" id="minutos" placeholder="Minutos" min="0" max="59" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-play"></i> Iniciar Simulado
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Histórico -->
+        <div class="tab-pane fade" id="historico">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Filtros -->
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <select class="form-select" id="filtroMes">
+                                <option value="">Todos os meses</option>
+                                <option value="1">Janeiro</option>
+                                <!-- ...outros meses... -->
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-select" id="filtroMateria">
+                                <option value="">Todas as matérias</option>
+                                <!-- ...matérias... -->
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Buscar...">
+                                <button class="btn btn-outline-secondary">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Simulados -->
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Simulado</th>
+                                    <th>Questões</th>
+                                    <th>Acertos</th>
+                                    <th>Tempo</th>
+                                    <th class="text-end">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in historico %}
+                                <tr>
+                                    <td>{{ item.data }}</td>
+                                    <td>
+                                        <div class="fw-bold">{{ item.titulo }}</div>
+                                        <small class="text-muted">{{ item.tipo }}</small>
+                                    </td>
+                                    <td>{{ item.questoes }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="progress flex-grow-1" style="height: 6px;">
+                                                <div class="progress-bar" style="width: {{ item.acertos_percentual }}%"></div>
+                                            </div>
+                                            <span class="ms-2">{{ item.acertos }}</span>
+                                        </div>
+                                    </td>
+                                    <td>{{ item.tempo }}</td>
+                                    <td class="text-end">
+                                        <div class="btn-group">
+                                            <button class="btn btn-sm btn-info" onclick="verDetalhes('{{ item.id }}')">
+                                                <i class="fas fa-chart-bar"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-secondary" onclick="verErros('{{ item.id }}')">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-success" onclick="refazer('{{ item.id }}')">
+                                                <i class="fas fa-redo"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .input-group {
+        margin-bottom: 1rem;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .table-responsive {
+        margin: 0 -1rem;
+        padding: 0 1rem;
+        width: calc(100% + 2rem);
+    }
+    
+    .progress {
+        height: 1rem;
+    }
+}
+
+/* Melhorias para tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .col-md-4 {
+        width: 50%;
+    }
+}
+
+.card {
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background: rgba(0,0,0,0.05);
+}
+
+.stat-item i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-item span {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.stat-item small {
+    color: #6c757d;
+}
+
+.progress-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: conic-gradient(var(--bs-primary) var(--progress), #e9ecef 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.progress-circle::before {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 50%;
+}
+
+.progress-circle-value {
+    position: relative;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.btn-group label.btn {
+    padding: 1rem;
+    transition: all 0.3s;
+}
+
+.btn-group label.btn:hover {
+    transform: translateY(-2px);
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn-group label.btn {
+        margin-bottom: 0.5rem;
+    }
+}
+</style>
+
+{% block scripts %}
+<script>
+function iniciarSimulado() {
+    const tipo = document.getElementById('tipo-simulado').value;
+    const materia = document.getElementById('materia').value;
+    const horas = document.getElementById('horas').value || 0;
+    const minutos = document.getElementById('minutos').value || 0;
+    
+    if (!tipo) {
+        alert('Selecione o tipo de simulado');
+        return;
+    }
+    
+    if (horas == 0 && minutos == 0) {
+        alert('Defina um tempo para o simulado');
+        return;
+    }
+    
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = "{{ url_for('simulados.iniciar_simulado') }}";
+    
+    const campos = {
+        'tipo': tipo,
+        'materia': materia,
+        'tempo': (parseInt(horas) * 3600) + (parseInt(minutos) * 60)
+    };
+    
+    for (const [key, value] of Object.entries(campos)) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value;
+        form.appendChild(input);
+    }
+    
+    document.body.appendChild(form);
+    form.submit();
+}
+
+function verDetalhes(id) {
+    window.location.href = `/simulados/resultado/${id}`;
+}
+
+function verErros(id) {
+    window.location.href = `/simulados/erros/${id}`;
+}
+
+// Adicionar feedback visual para interações
+document.addEventListener('DOMContentLoaded', function() {
+    const inputs = document.querySelectorAll('input, select');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.closest('.card').classList.add('border-primary');
+        });
+        
+        input.addEventListener('blur', function() {
+            this.closest('.card').classList.remove('border-primary');
+        });
+    });
+});
+
+// Inicializar progress circles
+document.querySelectorAll('.progress-circle').forEach(circle => {
+    const value = circle.dataset.value;
+    circle.style.setProperty('--progress', `${value}%`);
+});
+
+// Validação do formulário
+document.getElementById('novoSimuladoForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!this.checkValidity()) {
+        e.stopPropagation();
+        this.classList.add('was-validated');
+        return;
+    }
+    iniciarSimulado();
+});
+
+function refazer(id) {
+    Swal.fire({
+        title: 'Refazer Simulado',
+        text: 'Deseja refazer este simulado com as mesmas configurações?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, refazer',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Implementar lógica de refazer
+        }
+    });
+}
+</script>
+{% endblock %}
+{% endblock %}

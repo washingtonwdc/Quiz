@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Entre em Contato</h2>
+            <p class="lead mb-4">Tem alguma dúvida ou sugestão? Ficaremos felizes em ajudar!</p>
+            
+            <form id="contactForm" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label class="form-label">Nome</label>
+                    <input type="text" class="form-control" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">E-mail</label>
+                    <input type="email" class="form-control" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Assunto</label>
+                    <select class="form-select" required>
+                        <option value="">Selecione...</option>
+                        <option>Dúvida sobre conteúdo</option>
+                        <option>Problema técnico</option>
+                        <option>Sugestão</option>
+                        <option>Outro</option>
+                    </select>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Mensagem</label>
+                    <textarea class="form-control" rows="5" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                </button>
+            </form>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5><i class="fas fa-map-marker-alt"></i> Onde Estamos</h5>
+                    <p>Rua Exemplo, 123<br>Bairro - Cidade/UF<br>CEP: 12345-678</p>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5><i class="fas fa-clock"></i> Horário de Atendimento</h5>
+                    <p>Segunda a Sexta: 9h às 18h<br>Sábado: 9h às 13h</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h5><i class="fas fa-phone"></i> Contatos</h5>
+                    <p>
+                        <i class="fas fa-envelope"></i> contato@exemplo.com<br>
+                        <i class="fab fa-whatsapp"></i> (11) 99999-9999<br>
+                        <i class="fas fa-phone"></i> (11) 3333-3333
+                    </p>
+                    
+                    <div class="social-links mt-3">
+                        <a href="#" class="btn btn-outline-primary me-2">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-info me-2">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-danger me-2">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-success">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Implementar lógica de envio do formulário
+    alert('Mensagem enviada com sucesso!');
+});
+</script>
+{% endblock %}
+{% endblock %}

@@ -1,23 +1,36 @@
-from flask_login import UserMixin
-from bson import ObjectId
-from app.routes import login_manager, mongo
+from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
-class User(UserMixin):
-    def __init__(self, user_data):
-        self.id = str(user_data.get('_id', ''))
-        self.email = user_data.get('email', '')
-        self.username = user_data.get('username', '')
-        self.role = user_data.get('role', 'user')
+class User:
+    def __init__(self, id, username, email, created_at=None):
+        self.id = id
+        self.username = username
+        self.email = email
+        self.created_at = created_at or datetime.now()
+        self._password = None
+        self.profile = None
+        self.progress = {}
+        self.preferences = {}
 
-    def is_admin(self):
-        return self.role == 'admin'
+    def set_password(self, password):
+        self._password = generate_password_hash(password)
 
-@login_manager.user_loader
-def load_user(user_id):
-    try:
-        user_data = mongo.db.users.find_one({"_id": ObjectId(user_id)})
-        if user_data:
-            return User(user_data)
-    except:
-        return None
-    return None
+    def check_password(self, password):
+        return check_password_hash(self._password, password)
+
+    def get_progress(self, subject=None):
+        if subject:
+            return self.progress.get(subject, 0)
+        return sum(self.progress.values()) / len(self.progress) if self.progress else 0
+
+    def update_progress(self, subject, value):
+        self.progress[subject] = value
+
+class UserProfile:
+    def __init__(self, user_id):
+        self.user_id = user_id
+        self.bio = ""
+        self.avatar_url = None
+        self.social_links = {}
+        self.study_goals = []
+        self.achievements = []

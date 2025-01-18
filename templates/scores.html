@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game - Scores</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- ...existing code... -->
+    <script src="{{ url_for('static', filename='js/scores.js') }}"></script>
+</body>
+</html>
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Resumo de Pontuação -->
+        <div class="col-md-4">
+            <div class="card text-center mb-4">
+                <div class="card-body">
+                    <h3 class="display-4 mb-3">{{ total_score }}</h3>
+                    <h6 class="text-muted">Pontuação Total</h6>
+                    <div class="d-flex justify-content-around mt-3">
+                        <div>
+                            <h4>{{ correct_answers }}</h4>
+                            <small class="text-success">Acertos</small>
+                        </div>
+                        <div>
+                            <h4>{{ accuracy }}%</h4>
+                            <small class="text-primary">Precisão</small>
+                        </div>
+                        <div>
+                            <h4>{{ games_played }}</h4>
+                            <small class="text-info">Jogos</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medalhas -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Medalhas</h5>
+                </div>
+                <div class="card-body">
+                    <div class="badges-grid">
+                        {% for badge in badges %}
+                        <div class="badge-item" data-bs-toggle="tooltip" title="{{ badge.description }}">
+                            <i class="{{ badge.icon }} fa-2x {{ 'text-muted' if not badge.earned }}"></i>
+                            <small>{{ badge.name }}</small>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Histórico de Jogos -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Histórico de Jogos</h5>
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-outline-primary active">Todos</button>
+                        <button class="btn btn-sm btn-outline-primary">Hoje</button>
+                        <button class="btn btn-sm btn-outline-primary">Esta Semana</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Categoria</th>
+                                    <th>Pontuação</th>
+                                    <th>Tempo</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for game in games %}
+                                <tr>
+                                    <td>{{ game.date }}</td>
+                                    <td>{{ game.category }}</td>
+                                    <td>
+                                        <div class="progress" style="width: 100px">
+                                            <div class="progress-bar" style="width: {{ game.score_percentage }}%">
+                                                {{ game.score }}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{ game.time }}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info" onclick="viewDetails({{ game.id }})">
+                                            <i class="fas fa-chart-bar"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-secondary" onclick="reviewGame({{ game.id }})">
+                                            <i class="fas fa-redo"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block styles %}
+<style>
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    text-align: center;
+}
+
+.badge-item {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: #f8f9fa;
+}
+
+.badge-item small {
+    display: block;
+    margin-top: 0.5rem;
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function viewDetails(gameId) {
+    window.location.href = `/game/${gameId}/details`;
+}
+
+function reviewGame(gameId) {
+    window.location.href = `/game/${gameId}/review`;
+}
+
+// Inicializar tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+});
+</script>
+{% endblock %}
+{% endblock %}

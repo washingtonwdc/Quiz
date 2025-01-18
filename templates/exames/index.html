@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <!-- Dashboard Rápido -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h6><i class="fas fa-tasks"></i> Progresso Geral</h6>
+                    <h2>{{ dados.progresso_geral }}%</h2>
+                    <div class="progress">
+                        <div class="progress-bar bg-white" style="width: {{ dados.progresso_geral }}%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h6><i class="fas fa-check-circle"></i> Exames Concluídos</h6>
+                    <h2>{{ dados.exames_concluidos }}</h2>
+                    <small>de {{ dados.total_exames }} exames</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h6><i class="fas fa-star"></i> Média de Acertos</h6>
+                    <h2>{{ dados.media_acertos }}%</h2>
+                    <small>últimos 30 dias</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h6><i class="fas fa-clock"></i> Próximo Exame</h6>
+                    {% if dados.proximo_exame %}
+                    <h4>{{ dados.proximo_exame.nome }}</h4>
+                    <small>em {{ dados.proximo_exame.dias }} dias</small>
+                    {% else %}
+                    <h4>Nenhum exame agendado</h4>
+                    <small>Confira os próximos exames disponíveis</small>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtros Avançados -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="pesquisar" placeholder="Pesquisar exames...">
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" id="filtro-disciplina">
+                        <option value="">Disciplina</option>
+                        {% for d in disciplinas %}
+                        <option value="{{ d.id }}">{{ d.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" id="filtro-nivel">
+                        <option value="">Nível</option>
+                        <option value="facil">Fácil</option>
+                        <option value="medio">Médio</option>
+                        <option value="dificil">Difícil</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" id="filtro-status">
+                        <option value="">Status</option>
+                        <option value="disponivel">Disponível</option>
+                        <option value="agendado">Agendado</option>
+                        <option value="concluido">Concluído</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <div class="btn-group w-100">
+                        <button class="btn btn-primary" onclick="aplicarFiltros()">
+                            <i class="fas fa-filter"></i> Filtrar
+                        </button>
+                        <button class="btn btn-secondary" onclick="limparFiltros()">
+                            <i class="fas fa-sync"></i> Limpar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de Exames -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for exame in exames %}
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">{{ exame.nome }}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><i class="fas fa-graduation-cap"></i> {{ exame.disciplina }}</p>
+                    <p class="card-text"><i class="far fa-calendar-alt"></i> {{ exame.data }}</p>
+                    <p class="card-text"><i class="far fa-clock"></i> {{ exame.duracao }} minutos</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url_for('exames.detalhe', exame_id=exame.id) }}" class="btn btn-primary w-100">
+                        <i class="fas fa-info-circle"></i> Ver Detalhes
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Recursos de Preparação -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-book-reader"></i> Material de Estudo</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        {% if dados.materiais_estudo %}
+                            {% for material in dados.materiais_estudo %}
+                            <a href="{{ material.url }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-1">{{ material.titulo }}</h6>
+                                    <small class="text-muted">{{ material.descricao }}</small>
+                                </div>
+                                <span class="badge bg-primary rounded-pill">{{ material.duracao }}</span>
+                            </a>
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-center">Nenhum material disponível</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="fas fa-calendar-alt"></i> Cronograma Sugerido</h5>
+                </div>
+                <div class="card-body">
+                    <div class="timeline">
+                        {% for evento in dados.cronograma %}
+                        <div class="timeline-item">
+                            <div class="timeline-date">{{ evento.data }}</div>
+                            <div class="timeline-content">
+                                <h6>{{ evento.titulo }}</h6>
+                                <p>{{ evento.descricao }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+function aplicarFiltros() {
+    // Implementar lógica de filtros
+    const filtros = {
+        disciplina: document.getElementById('filtro-disciplina').value,
+        nivel: document.getElementById('filtro-nivel').value,
+        status: document.getElementById('filtro-status').value,
+        busca: document.getElementById('pesquisar').value
+    };
+    // Fazer requisição AJAX com os filtros
+}
+
+function limparFiltros() {
+    document.getElementById('filtro-disciplina').value = '';
+    document.getElementById('filtro-nivel').value = '';
+    document.getElementById('filtro-status').value = '';
+    document.getElementById('pesquisar').value = '';
+    aplicarFiltros();
+}
+</script>
+
+<style>
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 20px;
+}
+
+.timeline-date {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background-color: #dee2e6;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #007bff;
+}
+</style>
+{% endblock %}
+{% endblock %}

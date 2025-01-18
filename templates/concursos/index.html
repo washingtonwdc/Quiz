@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}Concursos Públicos - ConQuiz{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Filtros e Pesquisa -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2 class="mb-3">Concursos Públicos</h2>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group">
+                <select class="form-select" id="filterArea">
+                    <option value="">Todas as áreas</option>
+                    <option value="federal">Federal</option>
+                    <option value="estadual">Estadual</option>
+                    <option value="municipal">Municipal</option>
+                </select>
+                <input type="text" class="form-control" placeholder="Buscar concurso...">
+                <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tags de filtro rápido -->
+    <div class="mb-4">
+        <button class="btn btn-outline-primary me-2 mb-2">Polícia</button>
+        <button class="btn btn-outline-primary me-2 mb-2">Tribunais</button>
+        <button class="btn btn-outline-primary me-2 mb-2">Fiscais</button>
+        <button class="btn btn-outline-primary me-2 mb-2">Professores</button>
+        <button class="btn btn-outline-primary me-2 mb-2">Administrativo</button>
+    </div>
+
+    <div class="row">
+        <!-- Filtros laterais -->
+        <div class="col-md-3">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Filtros</h5>
+                    <div class="mb-3">
+                        <label class="form-label">Salário</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="salary1">
+                            <label class="form-check-label" for="salary1">
+                                Até R$ 5.000
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="salary2">
+                            <label class="form-check-label" for="salary2">
+                                R$ 5.000 - R$ 10.000
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="salary3">
+                            <label class="form-check-label" for="salary3">
+                                Acima de R$ 10.000
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Escolaridade</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="edu1">
+                            <label class="form-check-label" for="edu1">
+                                Ensino Médio
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="edu2">
+                            <label class="form-check-label" for="edu2">
+                                Ensino Superior
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista de Concursos -->
+        <div class="col-md-9">
+            <!-- Concurso Card - Polícia Federal -->
+            <div class="card concurso-card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h4 class="card-title">Polícia Federal</h4>
+                                    <p class="text-muted mb-2">Agente, Escrivão e Papiloscopista</p>
+                                </div>
+                                <span class="badge bg-primary">Em breve</span>
+                            </div>
+                            <div class="mb-3">
+                                <span class="me-3"><i class="fas fa-user-friends"></i> 1.500 vagas</span>
+                                <span class="me-3"><i class="fas fa-money-bill-wave"></i> R$ 12.522,50</span>
+                                <span><i class="fas fa-graduation-cap"></i> Superior</span>
+                            </div>
+                            <div class="progress mb-2" style="height: 5px;">
+                                <div class="progress-bar bg-success" style="width: 75%"></div>
+                            </div>
+                            <small class="text-muted">Inscrições previstas para Abril/2024</small>
+                        </div>
+                        <div class="col-md-3 text-end">
+                            <a href="{{ url_for('concursos.detalhe', concurso_id='pf') }}" class="btn btn-primary mb-2">Ver Detalhes</a>
+                            <button class="btn btn-outline-primary"><i class="far fa-bell"></i> Notificar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Concurso Card - Receita Federal -->
+            <div class="card concurso-card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h4 class="card-title">Receita Federal</h4>
+                                    <p class="text-muted mb-2">Auditor e Analista</p>
+                                </div>
+                                <span class="badge bg-success">Inscrições Abertas</span>
+                            </div>
+                            <div class="mb-3">
+                                <span class="me-3"><i class="fas fa-user-friends"></i> 699 vagas</span>
+                                <span class="me-3"><i class="fas fa-money-bill-wave"></i> R$ 21.029,09</span>
+                                <span><i class="fas fa-graduation-cap"></i> Superior</span>
+                            </div>
+                            <div class="progress mb-2" style="height: 5px;">
+                                <div class="progress-bar bg-success" style="width: 90%"></div>
+                            </div>
+                            <small class="text-muted">Inscrições até 20/02/2024</small>
+                        </div>
+                        <div class="col-md-3 text-end">
+                            <a href="{{ url_for('concursos.detalhe', concurso_id='rf') }}" class="btn btn-primary mb-2">Ver Detalhes</a>
+                            <button class="btn btn-outline-primary"><i class="far fa-bell"></i> Notificar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paginação -->
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Próxima</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock %}

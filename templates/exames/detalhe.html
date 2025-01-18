@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('exames.index') }}">Exames</a></li>
+            <li class="breadcrumb-item active">{{ exame.nome }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0"><i class="fas fa-file-alt"></i> {{ exame.nome }}</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-info-circle"></i> Informações Básicas</h5>
+                            <p><i class="fas fa-graduation-cap"></i> <strong>Disciplina:</strong> {{ exame.disciplina }}</p>
+                            <p><i class="far fa-calendar-alt"></i> <strong>Data:</strong> {{ exame.data }}</p>
+                            <p><i class="far fa-clock"></i> <strong>Duração:</strong> {{ exame.duracao }} minutos</p>
+                            <p><i class="fas fa-question-circle"></i> <strong>Total de Questões:</strong> {{ exame.total_questoes }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-chart-bar"></i> Estatísticas</h5>
+                            <p><i class="fas fa-users"></i> <strong>Participantes:</strong> {{ exame.total_participantes }}</p>
+                            <p><i class="fas fa-star"></i> <strong>Média de Notas:</strong> {{ exame.media_notas }}</p>
+                            <p><i class="fas fa-check-circle"></i> <strong>Taxa de Aprovação:</strong> {{ exame.taxa_aprovacao }}%</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h5><i class="fas fa-list"></i> Instruções</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item"><i class="fas fa-check"></i> Leia todas as questões com atenção</li>
+                            <li class="list-group-item"><i class="fas fa-check"></i> Você terá {{ exame.duracao }} minutos para completar</li>
+                            <li class="list-group-item"><i class="fas fa-check"></i> Não é permitido consultar material externo</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url_for('exames.iniciar', exame_id=exame.id) }}" class="btn btn-success btn-lg">
+                        <i class="fas fa-play-circle"></i> Iniciar Exame
+                    </a>
+                    <a href="{{ url_for('exames.index') }}" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="fas fa-trophy"></i> Ranking</h5>
+                </div>
+                <div class="card-body">
+                    {% if melhores_notas %}
+                    <ul class="list-group">
+                        {% for nota in melhores_notas %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ nota.aluno }}
+                            <span class="badge bg-primary rounded-pill">{{ nota.valor }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="text-center">Ainda não há notas registradas</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

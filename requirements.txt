@@ -1,26 +1,6 @@
-# Core
-Flask>=2.2.0
-flask-pymongo>=2.3.0
-python-dotenv>=0.19.0
-
-# Autenticação
-flask-login>=0.6.0
-flask-wtf>=1.0.0
-flask-limiter
-flask-mail
-flask-wtf 
-flask_pymongo
-flask_limiter
-
-# Database
-pymongo>=3.12.0
-
-# Segurança
-python-jose>=3.3.0
-bcrypt>=4.0.1
-
-# Utilitários
-Werkzeug>=2.2.3
-Jinja2>=3.0.0
-MarkupSafe>=2.0.0
-
+Django==4.1.5
+djongo==1.3.6
+pymongo==3.12.3
+django-cors-headers==3.13.0
+djangorestframework==3.14.0
+psycopg2-binary==2.9.5

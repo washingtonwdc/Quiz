@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4>Meu Progresso</h4>
+                <div class="progress mb-3">
+                    <div class="progress-bar" role="progressbar" style="width: {{ desempenho }}%">
+                        {{ desempenho|floatformat:1 }}%
+                    </div>
+                </div>
+                <div class="stats">
+                    <p>Questões respondidas: {{ questoes_respondidas }}</p>
+                    <p>Simulados realizados: {{ simulados_realizados }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h4>Últimas Atividades</h4>
+                <div class="list-group">
+                    {% for atividade in ultimas_atividades %}
+                    <div class="list-group-item">
+                        <h6>{{ atividade.tipo }}</h6>
+                        <small>{{ atividade.data|date:"d/m/Y H:i" }}</small>
+                        <p>{{ atividade.descricao }}</p>
+                    </div>
+                    {% empty %}
+                    <p>Nenhuma atividade recente.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

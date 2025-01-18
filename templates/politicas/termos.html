@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-sm">
+                <div class="card-body p-5">
+                    <h1 class="mb-4">Termos de Uso</h1>
+                    <p class="text-muted">Última atualização: {{ now.strftime('%d/%m/%Y') }}</p>
+
+                    <section class="mb-5">
+                        <h2 class="h4">1. Aceitação dos Termos</h2>
+                        <p>Ao acessar e usar o ConQuiz, você concorda com estes termos de uso. Se você não concordar com qualquer parte destes termos, não poderá usar nossos serviços.</p>
+                    </section>
+
+                    <section class="mb-5">
+                        <h2 class="h4">2. Uso do Serviço</h2>
+                        <ul>
+                            <li>O serviço é destinado apenas para uso educacional e de preparação para concursos.</li>
+                            <li>Você é responsável por manter a confidencialidade de sua conta.</li>
+                            <li>O conteúdo não pode ser reproduzido ou distribuído sem autorização.</li>
+                        </ul>
+                    </section>
+
+                    <section class="mb-5">
+                        <h2 class="h4">3. Conteúdo do Usuário</h2>
+                        <p>Ao submeter conteúdo em nossa plataforma, você:</p>
+                        <ul>
+                            <li>Garante que possui todos os direitos necessários.</li>
+                            <li>Concede uma licença não exclusiva para uso do conteúdo.</li>
+                            <li>É responsável pela precisão e legalidade do conteúdo.</li>
+                        </ul>
+                    </section>
+
+                    <section class="mb-5">
+                        <h2 class="h4">4. Limitações de Responsabilidade</h2>
+                        <p>O ConQuiz não se responsabiliza por:</p>
+                        <ul>
+                            <li>Aprovação ou reprovação em concursos</li>
+                            <li>Precisão total do conteúdo</li>
+                            <li>Interrupções no serviço</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

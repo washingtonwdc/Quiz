@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4">Entrar</h2>
+                    
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-warning">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <form method="POST" action="{{ url_for('login') }}">
+                        <div class="mb-3">
+                            <label class="form-label">E-mail</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Senha</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                <input type="password" class="form-control" name="password" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="remember">
+                            <label class="form-check-label" for="remember">Lembrar-me</label>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <p class="mb-2">Ou entre com:</p>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-danger">
+                                <i class="fab fa-google"></i> Google
+                            </button>
+                            <button class="btn btn-outline-primary">
+                                <i class="fab fa-facebook"></i> Facebook
+                            </button>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <p class="mb-0">Não tem uma conta? <a href="{{ url_for('register') }}">Registre-se</a></p>
+                        <a href="{{ url_for('recuperar_senha') }}" class="text-decoration-none">
+                            Esqueceu sua senha?
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

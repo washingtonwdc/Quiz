@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Estatísticas -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h3 class="card-title">{{ estatisticas.total_questoes }}</h3>
+                    <p class="card-text text-muted">Questões no Banco</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h3 class="card-title">{{ estatisticas.bancas_cobertas }}</h3>
+                    <p class="card-text text-muted">Bancas Cobertas</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h3 class="card-title">{{ estatisticas.media_dificuldade }}</h3>
+                    <p class="card-text text-muted">Média de Dificuldade</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form id="filtrosForm" class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">Banca</label>
+                    <select class="form-select" name="banca">
+                        <option value="">Todas</option>
+                        {% for banca in filtros.bancas %}
+                        <option value="{{ banca.id }}">{{ banca.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Área</label>
+                    <select class="form-select" name="area">
+                        <option value="">Todas</option>
+                        {% for area in filtros.areas %}
+                        <option value="{{ area }}">{{ area }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Nível</label>
+                    <select class="form-select" name="nivel">
+                        <option value="">Todos</option>
+                        {% for nivel in filtros.niveis %}
+                        <option value="{{ nivel }}">{{ nivel }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Estado</label>
+                    <select class="form-select" name="estado">
+                        <option value="">Todos</option>
+                        {% for estado in filtros.estados %}
+                        <option value="{{ estado }}">{{ estado }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Faixa Salarial</label>
+                    <div class="input-group">
+                        <input type="number" class="form-control" name="salario_min" placeholder="Mínimo">
+                        <span class="input-group-text">até</span>
+                        <input type="number" class="form-control" name="salario_max" placeholder="Máximo">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Status</label>
+                    <div class="btn-group w-100" role="group">
+                        <input type="checkbox" class="btn-check" name="status" value="previsto" id="status1">
+                        <label class="btn btn-outline-secondary" for="status1">Previsto</label>
+                        
+                        <input type="checkbox" class="btn-check" name="status" value="em_breve" id="status2">
+                        <label class="btn btn-outline-secondary" for="status2">Em Breve</label>
+                        
+                        <input type="checkbox" class="btn-check" name="status" value="inscricoes" id="status3">
+                        <label class="btn btn-outline-secondary" for="status3">Inscrições Abertas</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-filter"></i> Filtrar
+                    </button>
+                    <button type="reset" class="btn btn-outline-secondary">
+                        <i class="fas fa-times"></i> Limpar Filtros
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lista de Concursos -->
+    <div class="row" id="listaConcursos">
+        {% for concurso in concursos %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h5 class="card-title">{{ concurso.titulo }}</h5>
+                        <span class="badge bg-{{ concurso.status_class }}">{{ concurso.status }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <p class="mb-1"><i class="fas fa-building text-muted"></i> {{ concurso.banca }}</p>
+                        <p class="mb-1"><i class="fas fa-map-marker-alt text-muted"></i> {{ concurso.estado }}</p>
+                        <p class="mb-1"><i class="fas fa-graduation-cap text-muted"></i> {{ concurso.nivel }}</p>
+                        <p class="mb-1"><i class="fas fa-money-bill-wave text-muted"></i> R$ {{ "%.2f"|format(concurso.salario) }}</p>
+                        <p class="mb-1"><i class="fas fa-users text-muted"></i> {{ concurso.vagas }} vagas</p>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">
+                            <i class="far fa-calendar-alt"></i> Prova: {{ concurso.prova }}
+                        </small>
+                        <a href="{{ url_for('concursos.detalhe', concurso_id=concurso.id) }}" class="btn btn-primary btn-sm">
+                            Saiba mais
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('filtrosForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const filtros = Object.fromEntries(formData);
+    
+    fetch('/bancas/filtrar', {  // URL direta ao invés de url_for
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(filtros)
+    })
+    .then(response => response.json())
+    .then(data => {
+        atualizarListaConcursos(data.concursos);
+    })
+    .catch(error => console.error('Erro:', error));
+});
+
+function atualizarListaConcursos(concursos) {
+    const container = document.getElementById('listaConcursos');
+    container.innerHTML = concursos.map(concurso => `
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h5 class="card-title">${concurso.titulo}</h5>
+                        <span class="badge bg-${concurso.status_class}">${concurso.status}</span>
+                    </div>
+                    <div class="mb-3">
+                        <p class="mb-1"><i class="fas fa-building text-muted"></i> ${concurso.banca}</p>
+                        <p class="mb-1"><i class="fas fa-map-marker-alt text-muted"></i> ${concurso.estado}</p>
+                        <p class="mb-1"><i class="fas fa-graduation-cap text-muted"></i> ${concurso.nivel}</p>
+                        <p class="mb-1"><i class="fas fa-money-bill-wave text-muted"></i> R$ ${concurso.salario.toFixed(2)}</p>
+                        <p class="mb-1"><i class="fas fa-users text-muted"></i> ${concurso.vagas} vagas</p>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">
+                            <i class="far fa-calendar-alt"></i> Prova: ${concurso.prova}
+                        </small>
+                        <a href="/concursos/${concurso.id}" class="btn btn-primary btn-sm">
+                            Saiba mais
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+</script>
+{% endblock %}

@@ -1,0 +1,869 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="row">
+        <!-- Barra lateral -->
+        <div class="col-md-3">
+            <div class="card sticky-top" style="top: 1rem;">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">{{ simulado.titulo }}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3">
+                        <span><i class="fas fa-clock"></i> Tempo Restante:</span>
+                        <span id="timer" class="text-danger">{{ tempo_restante }}</span>
+                    </div>
+                    <div class="progress mb-3">
+                        <div class="progress-bar" role="progressbar" 
+                             style="width: {{ (questao.numero / total_questoes) * 100 }}%">
+                            {{ questao.numero }}/{{ total_questoes }}
+                        </div>
+                    </div>
+                    <div class="questoes-grid">
+                        {% for i in range(1, total_questoes + 1) %}
+                        <a href="{{ url_for('simulados.questao', numero=i) }}" 
+                           class="btn btn-outline-primary btn-sm mb-2 {{ 'active' if i == questao.numero }} {{ 'respondida' if i in respondidas }}">
+                            {{ i }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo da questão -->
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Questão {{ questao.numero }}</h5>
+                    <div class="btn-group">
+                        <button class="btn btn-outline-primary" onclick="marcarRevisao()">
+                            <i class="fas fa-flag"></i> Marcar para Revisão
+                        </button>
+                        <button class="btn btn-outline-secondary" onclick="anotacao()">
+                            <i class="fas fa-sticky-note"></i> Anotações
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Status do Simulado -->
+                    <div class="alert alert-info mb-4">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <small>Sequência de acertos: <span id="sequenciaAcertos">0</span></small>
+                            </div>
+                            <div class="col">
+                                <small>Maior sequência: <span id="maiorSequencia">0</span></small>
+                            </div>
+                            <div class="col">
+                                <small>Tempo médio: <span id="tempoMedio">0:00</span></small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="questao-texto mb-4">
+                        {{ questao.texto|safe }}
+                    </div>
+                    
+                    <form id="respostaForm" method="POST" action="{{ url_for('simulados.responder_questao', questao_id=questao.id) }}">
+                        <input type="hidden" name="tempo_gasto" id="tempoGasto" value="0">
+                        {% for alternativa in questao.alternativas %}
+                        <div class="alternativa mb-3 {% if alternativa.id in respondidas %}respondida{% endif %}">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" 
+                                       name="resposta" value="{{ alternativa.id }}"
+                                       id="alt{{ alternativa.id }}"
+                                       {% if alternativa.id == resposta_atual %}checked{% endif %}>
+                                <label class="form-check-label" for="alt{{ alternativa.id }}">
+                                    {{ alternativa.texto }}
+                                </label>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </form>
+
+                    <!-- Modal de Anotações -->
+                    <div class="modal fade" id="anotacoesModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Anotações - Questão {{ questao.numero }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea id="anotacaoTexto" class="form-control" rows="5">{{ anotacao_atual }}</textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                    <button type="button" class="btn btn-primary" onclick="salvarAnotacao()">Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    {% if questao.numero > 1 %}
+                    <a href="{{ url_for('simulados.questao', numero=questao.numero-1) }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Anterior
+                    </a>
+                    {% else %}
+                    <div></div>
+                    {% endif %}
+                    
+                    {% if questao.numero < total_questoes %}
+                    <button onclick="responderESeguir()" class="btn btn-primary">
+                        Próxima <i class="fas fa-arrow-right"></i>
+                    </button>
+                    {% else %}
+                    <button onclick="finalizarSimulado()" class="btn btn-success">
+                        Finalizar Simulado
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+let tempoRestante = {{ tempo_restante_segundos }};
+let timerInterval;
+
+function atualizarTimer() {
+    const horas = Math.floor(tempoRestante / 3600);
+    const minutos = Math.floor((tempoRestante % 3600) / 60);
+    const segundos = tempoRestante % 60;
+    const timerElement = document.getElementById('timer');
+    
+    if (tempoRestante <= 0) {
+        clearInterval(timerInterval);
+        Swal.fire({
+            title: 'Tempo Esgotado!',
+            text: 'O tempo para realização do simulado acabou.',
+            icon: 'warning',
+            showCancelButton: false,
+            confirmButtonText: 'Finalizar'
+        }).then(() => {
+            finalizarSimulado(true);
+        });
+        return;
+    }
+    
+    timerElement.textContent = 
+        `${String(horas).padStart(2, '0')}:${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
+    
+    if (tempoRestante <= 300) { // 5 minutos restantes
+        timerElement.classList.add('text-danger', 'fw-bold', 'blink');
+        
+        if (tempoRestante === 300) { // Exatamente 5 minutos
+            Swal.fire({
+                title: 'Atenção!',
+                text: 'Faltam apenas 5 minutos para o término do simulado!',
+                icon: 'warning',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000
+            });
+        }
+    }
+    
+    tempoRestante--;
+}
+
+let tempoQuestao = 0;
+setInterval(() => {
+    tempoQuestao++;
+    document.getElementById('tempoGasto').value = tempoQuestao;
+}, 1000);
+
+function marcarRevisao() {
+    const questaoId = {{ questao.id }};
+    fetch(`/simulados/marcar-revisao/${questaoId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.marcada) {
+            document.querySelector('.btn-outline-primary').classList.add('active');
+        } else {
+            document.querySelector('.btn-outline-primary').classList.remove('active');
+        }
+    });
+}
+
+function anotacao() {
+    const modal = new bootstrap.Modal(document.getElementById('anotacoesModal'));
+    modal.show();
+}
+
+function salvarAnotacao() {
+    const texto = document.getElementById('anotacaoTexto').value;
+    const questaoId = {{ questao.id }};
+    
+    fetch(`/simulados/salvar-anotacao/${questaoId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ texto })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            bootstrap.Modal.getInstance(document.getElementById('anotacoesModal')).hide();
+        }
+    });
+}
+
+function responderESeguir() {
+    document.getElementById('respostaForm').submit();
+}
+
+function finalizarSimulado(timeOut = false) {
+    if (timeOut) {
+        window.location.href = `/simulados/resultado/${simulado.id}`;
+        return;
+    }
+    
+    Swal.fire({
+        title: 'Finalizar Simulado?',
+        text: 'Tem certeza que deseja finalizar o simulado?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, finalizar',
+        cancelButtonText: 'Não, continuar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = `/simulados/resultado/${simulado.id}`;
+        }
+    });
+}
+
+timerInterval = setInterval(atualizarTimer, 1000);
+
+function salvarProgresso() {
+    const progresso = {
+        questao: {{ questao.numero }},
+        tempo_restante: tempoRestante,
+        resposta: document.querySelector('input[name="resposta"]:checked')?.value
+    };
+    
+    localStorage.setItem('simulado_{{ simulado.id }}_progresso', JSON.stringify(progresso));
+}
+
+function carregarProgresso() {
+    const progresso = JSON.parse(localStorage.getItem('simulado_{{ simulado.id }}_progresso'));
+    if (progresso && progresso.resposta) {
+        document.querySelector(`input[value="${progresso.resposta}"]`).checked = true;
+    }
+}
+
+// Salvar progresso a cada 30 segundos
+setInterval(salvarProgresso, 30000);
+
+// Carregar progresso ao iniciar
+document.addEventListener('DOMContentLoaded', carregarProgresso);
+
+// Atualizar estilo das questões respondidas
+document.querySelectorAll('.questoes-grid .btn').forEach(btn => {
+    const numero = parseInt(btn.textContent);
+    const respondidas = {{ respondidas|tojson }};  // Agora é uma lista
+    const marcadas = {{ marcadas_revisao|tojson }}; // Agora é uma lista
+    
+    if (respondidas.includes(numero)) {
+        btn.classList.add('respondida');
+    }
+    if (marcadas.includes(numero)) {
+        btn.classList.add('revisao');
+    }
+});
+
+function atualizarStatus() {
+    fetch(`/simulados/status/{{ simulado.id }}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('sequenciaAcertos').textContent = data.sequencia_atual;
+            document.getElementById('maiorSequencia').textContent = data.maior_sequencia;
+            document.getElementById('tempoMedio').textContent = 
+                Math.floor(data.tempo_medio / 60) + ':' + 
+                String(Math.floor(data.tempo_medio % 60)).padStart(2, '0');
+            
+            // Atualizar progresso
+            const progressBar = document.querySelector('.progress-bar');
+            progressBar.style.width = data.progresso + '%';
+            progressBar.textContent = Math.round(data.progresso) + '%';
+        });
+}
+
+// Atualizar status a cada 30 segundos
+setInterval(atualizarStatus, 30000);
+atualizarStatus(); // Primeira execução
+
+// Adicionar confirmação antes de sair da página
+window.onbeforeunload = function() {
+    return "Tem certeza que deseja sair? Seu progresso será salvo, mas você perderá o foco da questão atual.";
+};
+
+// Adicionar handlers para responsividade
+document.addEventListener('DOMContentLoaded', function() {
+    // Ajustar altura em dispositivos móveis
+    function adjustHeight() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    window.addEventListener('resize', adjustHeight);
+    adjustHeight();
+    
+    // Melhorar scroll em dispositivos móveis
+    if (window.innerWidth < 768) {
+        document.querySelectorAll('.alternativa').forEach(alt => {
+            alt.addEventListener('click', function(e) {
+                if (e.target.tagName !== 'INPUT') {
+                    this.querySelector('input').click();
+                }
+            });
+        });
+    }
+});
+
+// Atalhos de teclado
+document.addEventListener('keydown', function(e) {
+    if (document.activeElement.tagName === 'TEXTAREA') return;
+    
+    switch(e.key) {
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+            document.querySelector(`#alt${e.key}`).click();
+            break;
+        case 'ArrowLeft':
+            document.querySelector('.btn-secondary')?.click();
+            break;
+        case 'ArrowRight':
+        case 'Enter':
+            document.querySelector('.btn-primary')?.click();
+            break;
+        case 'r':
+            marcarRevisao();
+            break;
+        case 'n':
+            anotacao();
+            break;
+        case 'd':
+            toggleDarkMode();
+            break;
+    }
+});
+
+// Navegação por gestos (mobile)
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    const swipeThreshold = 100;
+    if (touchEndX < touchStartX - swipeThreshold) {
+        // Swipe esquerda -> próxima questão
+        document.querySelector('.btn-primary')?.click();
+    }
+    if (touchEndX > touchStartX + swipeThreshold) {
+        // Swipe direita -> questão anterior
+        document.querySelector('.btn-secondary')?.click();
+    }
+}
+
+// Adicionar tooltips com atalhos
+document.querySelectorAll('.alternativa').forEach((alt, index) => {
+    const shortcut = document.createElement('span');
+    shortcut.className = 'keyboard-shortcut';
+    shortcut.textContent = `${index + 1}`;
+    alt.appendChild(shortcut);
+});
+
+// Menu de revisão
+function toggleReviewMenu() {
+    document.querySelector('.review-menu').classList.toggle('active');
+}
+
+// Salvar última questão visualizada
+window.addEventListener('beforeunload', function() {
+    localStorage.setItem('ultima_questao', {{ questao.numero }});
+});
+
+// Restaurar progresso ao carregar
+document.addEventListener('DOMContentLoaded', function() {
+    const ultimaQuestao = localStorage.getItem('ultima_questao');
+    if (ultimaQuestao && {{ questao.numero }} === 1) {
+        Swal.fire({
+            title: 'Continuar de onde parou?',
+            text: `Você estava na questão ${ultimaQuestao}`,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Não'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{{ url_for('simulados.questao', numero='') }}" + ultimaQuestao;
+            }
+        });
+    }
+});
+
+// Modo Noturno
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+}
+
+// Carregar preferência de modo noturno
+if (localStorage.getItem('darkMode') === 'true') {
+    document.body.classList.add('dark-mode');
+}
+
+// Feedback visual para seleção de alternativas
+document.querySelectorAll('.alternativa').forEach(alt => {
+    alt.addEventListener('click', function() {
+        document.querySelectorAll('.alternativa').forEach(a => a.classList.remove('selected'));
+        this.classList.add('selected');
+    });
+});
+</script>
+
+<style>
+.alternativa.respondida {
+    background-color: #e9ecef;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.blink {
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.questoes-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+}
+
+.questoes-grid .btn.active {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.btn.respondida {
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+}
+
+.btn.revisao {
+    background-color: #fff3cd;
+    border-color: #ffecb5;
+}
+
+.btn.active.respondida {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
+}
+
+.alert-info {
+    background-color: rgba(13, 202, 240, 0.1);
+    border-color: rgba(13, 202, 240, 0.2);
+}
+
+.sequencia-acertos {
+    font-weight: bold;
+    color: #198754;
+}
+
+.tempo-medio {
+    font-weight: bold;
+    color: #0dcaf0;
+}
+
+/* Melhorias para dispositivos móveis */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 0;
+    }
+    
+    .card {
+        border-radius: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .questoes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+        gap: 3px;
+    }
+    
+    .questoes-grid .btn {
+        padding: 0.25rem;
+        font-size: 0.875rem;
+    }
+    
+    .sticky-top {
+        position: static !important;
+        margin-bottom: 1rem;
+    }
+    
+    .card-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: white;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .card-body {
+        padding-bottom: 70px; /* Espaço para o footer fixo */
+    }
+    
+    .alternativa {
+        margin-bottom: 1rem;
+    }
+    
+    .alternativa label {
+        display: block;
+        padding: 0.5rem;
+    }
+    
+    .form-check-input {
+        margin-right: 0.5rem;
+    }
+    
+    .btn-group {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+    
+    .btn-group .btn {
+        flex: 1;
+    }
+    
+    .alert-info {
+        margin: -1rem -1rem 1rem -1rem;
+        border-radius: 0;
+    }
+    
+    #timer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        padding: 0.5rem 1rem;
+        background: rgba(0,0,0,0.8);
+        color: white;
+        z-index: 1001;
+        border-radius: 0 0 0 0.5rem;
+    }
+}
+
+/* Melhorias para tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .questoes-grid {
+        grid-template-columns: repeat(8, 1fr);
+    }
+    
+    .col-md-3 {
+        width: 35%;
+    }
+    
+    .col-md-9 {
+        width: 65%;
+    }
+}
+
+/* Melhorias para tela grande */
+@media (min-width: 1200px) {
+    .container-fluid {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    .questao-texto {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+    
+    .alternativa {
+        transition: all 0.2s ease;
+    }
+    
+    .alternativa:hover {
+        transform: translateX(5px);
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+}
+
+/* Feedback visual para respostas */
+.alternativa {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.alternativa.selected {
+    background-color: rgba(13, 110, 253, 0.1);
+    border-left: 3px solid #0d6efd;
+}
+
+.alternativa.correct {
+    background-color: rgba(25, 135, 84, 0.1);
+    border-left: 3px solid #198754;
+}
+
+.alternativa.incorrect {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-left: 3px solid #dc3545;
+}
+
+/* Atalhos de teclado */
+.keyboard-shortcut {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #e9ecef;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* Menu de navegação rápida */
+.quick-nav {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.quick-nav .btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Menu de revisão */
+.review-menu {
+    position: fixed;
+    right: -300px;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    transition: right 0.3s ease;
+    z-index: 1050;
+}
+
+.review-menu.active {
+    right: 0;
+}
+
+.review-toggle {
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Modo Noturno */
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+body.dark-mode .card {
+    background-color: #2d2d2d;
+    border-color: #404040;
+}
+
+body.dark-mode .card-header {
+    background-color: #404040;
+    border-bottom-color: #505050;
+}
+
+body.dark-mode .alternativa {
+    background-color: #353535;
+}
+
+body.dark-mode .alternativa:hover {
+    background-color: #404040;
+}
+
+/* Atalhos */
+.floating-help {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.shortcuts-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.shortcut-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+kbd {
+    background: #eee;
+    border-radius: 3px;
+    border: 1px solid #b4b4b4;
+    box-shadow: 0 1px 1px rgba(0,0,0,.2);
+    color: #333;
+    display: inline-block;
+    font-size: .85em;
+    padding: 2px 6px;
+}
+
+/* Feedback Visual Melhorado */
+.alternativa {
+    position: relative;
+    overflow: hidden;
+}
+
+.alternativa::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: transparent;
+    transition: background-color 0.3s;
+}
+
+.alternativa:hover::before {
+    background-color: #0d6efd;
+}
+
+.alternativa.selected::before {
+    background-color: #0d6efd;
+}
+
+/* Animações */
+@keyframes highlight {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.alternativa.selected {
+    animation: highlight 0.3s ease-in-out;
+}
+</style>
+
+<!-- Adicionar menu de navegação rápida -->
+<div class="quick-nav">
+    <button class="btn btn-primary" onclick="toggleReviewMenu()">
+        <i class="fas fa-list"></i>
+    </button>
+</div>
+
+<!-- Menu de revisão -->
+<div class="review-menu">
+    <button class="btn btn-light review-toggle" onclick="toggleReviewMenu()">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+    <div class="p-3">
+        <h5>Revisão</h5>
+        <div class="list-group">
+            {% for i in range(1, total_questoes + 1) %}
+            <a href="{{ url_for('simulados.questao', numero=i) }}" 
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center
+                      {% if i in respondidas %}respondida{% endif %}
+                      {% if i in marcadas_revisao %}revisao{% endif %}">
+                Questão {{ i }}
+                <div>
+                    {% if i in respondidas %}
+                    <i class="fas fa-check text-success"></i>
+                    {% endif %}
+                    {% if i in marcadas_revisao %}
+                    <i class="fas fa-flag text-warning"></i>
+                    {% endif %}
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Adicionar antes do fechamento do body -->
+<div class="floating-help">
+    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#helpModal">
+        <i class="fas fa-keyboard"></i>
+    </button>
+</div>
+
+<!-- Modal de Atalhos -->
+<div class="modal fade" id="helpModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Atalhos do Teclado</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="shortcuts-list">
+                    <div class="shortcut-item">
+                        <kbd>1</kbd> a <kbd>5</kbd> 
+                        <span>Selecionar alternativa</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>→</kbd> <span>Próxima questão</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>←</kbd> <span>Questão anterior</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>R</kbd> <span>Marcar para revisão</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>N</kbd> <span>Abrir anotações</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>D</kbd> <span>Modo noturno</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% endblock %}
